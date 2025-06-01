@@ -1,0 +1,95 @@
+{
+  "common": {
+    "welcome": "Chào mừng đến với RealEstate",
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "news": "Tin tức",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "search": "Tìm kiếm",
+    "language": "Ngôn ngữ",
+    "properties": "Bất động sản",
+    "find_dream_home": "Tìm Ngôi Nhà Mơ Ước",
+    "discover_perfect": "Khám phá bất động sản phù hợp với phong cách sống của bạn"
+  },
+  "navigation": {
+    "menu": "Menu",
+    "search": "Tìm kiếm bất động sản",
+    "latest": "Bất động sản mới nhất",
+    "popular": "Xem nhiều nhất",
+    "map": "Bản đồ bất động sản",
+    "home": "Trang chủ",
+    "properties": "Bất động sản",
+    "news": "Tin tức",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "property": {
+    "title": "Chi tiết bất động sản",
+    "price": "Giá",
+    "area": "Diện tích",
+    "location": "Vị trí",
+    "type": "Loại bất động sản",
+    "bedrooms": "Phòng ngủ",
+    "bathrooms": "Phòng tắm",
+    "description": "Mô tả",
+    "features": "Tính năng",
+    "contact_agent": "Liên hệ môi giới",
+    "similar": "Bất động sản tương tự",
+    "view_details": "Xem chi tiết"
+  },
+  "search": {
+    "title": "Tìm kiếm bất động sản",
+    "location": "Vị trí",
+    "property_type": "Loại bất động sản",
+    "price_range": "Khoảng giá",
+    "area_range": "Khoảng diện tích",
+    "filters": "Bộ lọc",
+    "results": "Kết quả tìm kiếm",
+    "no_results": "Không tìm thấy bất động sản",
+    "apply": "Áp dụng bộ lọc",
+    "reset": "Đặt lại",
+    "enter_location": "Nhập vị trí",
+    "select_type": "Chọn loại bất động sản",
+    "select_price": "Chọn khoảng giá"
+  },
+  "types": {
+    "house": "Nhà ở",
+    "apartment": "Căn hộ",
+    "villa": "Biệt thự",
+    "project": "Dự án",
+    "land": "Đất",
+    "commercial": "Thương mại"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgot_password": "Quên mật khẩu?",
+    "remember_me": "Ghi nhớ đăng nhập",
+    "no_account": "Chưa có tài khoản?",
+    "has_account": "Đã có tài khoản?"
+  },
+  "news": {
+    "title": "Tin tức bất động sản",
+    "latest": "Tin mới nhất",
+    "read_more": "Đọc thêm",
+    "published": "Đăng ngày"
+  },
+  "about": {
+    "title": "Về chúng tôi",
+    "mission": "Sứ mệnh",
+    "vision": "Tầm nhìn",
+    "team": "Đội ngũ"
+  },
+  "features": {
+    "wide_range": "Đa Dạng Bất Động Sản",
+    "wide_range_desc": "Tìm ngôi nhà hoàn hảo từ bộ sưu tập bất động sản đa dạng của chúng tôi",
+    "best_price": "Cam Kết Giá Tốt Nhất",
+    "best_price_desc": "Nhận được những giao dịch tốt nhất và giá cạnh tranh cho bất động sản mơ ước của bạn",
+    "trusted": "Dịch Vụ Đáng Tin Cậy",
+    "trusted_desc": "Dịch vụ chuyên nghiệp và đáng tin cậy từ đội ngũ giàu kinh nghiệm của chúng tôi"
+  }
+} 

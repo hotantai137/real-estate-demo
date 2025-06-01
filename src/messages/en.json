@@ -1,0 +1,122 @@
+{
+  "common": {
+    "welcome": "Welcome to RealEstate",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "news": "News",
+    "login": "Login",
+    "register": "Register",
+    "search": "Search",
+    "language": "Language",
+    "properties": "Properties",
+    "find_dream_home": "Find Your Dream Home",
+    "discover_perfect": "Discover the perfect property that matches your lifestyle"
+  },
+  "navigation": {
+    "menu": "Menu",
+    "search": "Search Properties",
+    "latest": "Latest Properties",
+    "popular": "Most Viewed",
+    "map": "Property Map",
+    "home": "Home",
+    "properties": "Properties",
+    "news": "News",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "property": {
+    "title": "Property Details",
+    "price": "Price",
+    "area": "Area",
+    "location": "Location",
+    "type": "Property Type",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "description": "Description",
+    "features": "Features",
+    "contact_agent": "Contact Agent",
+    "similar": "Similar Properties",
+    "view_details": "View Details"
+  },
+  "search": {
+    "title": "Search Properties",
+    "location": "Location",
+    "property_type": "Property Type",
+    "price_range": "Price Range",
+    "area_range": "Area Range",
+    "filters": "Filters",
+    "results": "Search Results",
+    "no_results": "No properties found",
+    "apply": "Apply Filters",
+    "reset": "Reset",
+    "enter_location": "Enter location",
+    "select_type": "Select property type",
+    "select_price": "Select price range"
+  },
+  "types": {
+    "house": "House",
+    "apartment": "Apartment",
+    "villa": "Villa",
+    "project": "Project",
+    "land": "Land",
+    "commercial": "Commercial"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember Me",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?"
+  },
+  "news": {
+    "title": "Real Estate News",
+    "latest": "Latest News",
+    "read_more": "Read More",
+    "published": "Published on"
+  },
+  "about": {
+    "title": "About Us",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "team": "Our Team"
+  },
+  "features": {
+    "wide_range": "Wide Range of Properties",
+    "wide_range_desc": "Find your perfect home from our extensive collection of properties",
+    "best_price": "Best Price Guarantee",
+    "best_price_desc": "Get the best deals and competitive prices for your dream property",
+    "trusted": "Trusted Service",
+    "trusted_desc": "Professional and reliable service from our experienced team"
+  },
+  "footer": {
+    "company": {
+      "title": "RealEstate",
+      "description": "Your trusted partner in finding the perfect property. We provide comprehensive real estate services with a focus on customer satisfaction."
+    },
+    "quick_links": {
+      "title": "Quick Links",
+      "home": "Home",
+      "properties": "Properties",
+      "about": "About",
+      "news": "News",
+      "contact": "Contact"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "address": "123 Real Estate Street, City, Country",
+      "email": "info@realestate.com",
+      "phone": "+1 234 567 890"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Subscribe to our newsletter to receive updates on new properties and real estate news.",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    },
+    "copyright": "© 2024 RealEstate. All rights reserved."
+  }
+} 
