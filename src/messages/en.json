@@ -27,6 +27,7 @@
   },
   "property": {
     "title": "Property Details",
+    "property_details": "Property Details",
     "price": "Price",
     "area": "Area",
     "location": "Location",
@@ -37,7 +38,15 @@
     "features": "Features",
     "contact_agent": "Contact Agent",
     "similar": "Similar Properties",
-    "view_details": "View Details"
+    "view_details": "View Details",
+    "types": {
+      "house": "House",
+      "apartment": "Apartment",
+      "villa": "Villa",
+      "project": "Project",
+      "land": "Land",
+      "commercial": "Commercial"
+    }
   },
   "search": {
     "title": "Search Properties",

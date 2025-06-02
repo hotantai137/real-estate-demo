@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import PropertyCard from '@/components/property/PropertyCard';
 import { getLatestProperties, getMostViewedProperties } from '@/data/properties';
-import { Link } from '@/i18n/navigation';
+import SearchBar from '@/components/SearchBar';
 
 export default function Home() {
   const t = useTranslations('navigation');
@@ -10,36 +10,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Navigation Menu */}
-      <nav className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-blue-600">
-                RealEstate
-              </Link>
-            </div>
-            <div className="flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
-                {t('home')}
-              </Link>
-              <Link href="/properties" className="text-gray-700 hover:text-blue-600">
-                {t('search')}
-              </Link>
-              <Link href="/news" className="text-gray-700 hover:text-blue-600">
-                {t('news')}
-              </Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600">
-                {t('about')}
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-                {t('contact')}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section with Search */}
       <div className="relative bg-blue-600 h-[600px]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -53,42 +23,8 @@ export default function Home() {
                 Discover the perfect property that matches your lifestyle
               </p>
             </div>
-            
             {/* Search Bar */}
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="col-span-1">
-                  <input
-                    type="text"
-                    placeholder="Location"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="col-span-1">
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Property Type</option>
-                    <option value="house">House</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="villa">Villa</option>
-                    <option value="land">Land</option>
-                  </select>
-                </div>
-                <div className="col-span-1">
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Price Range</option>
-                    <option value="0-100000">$0 - $100,000</option>
-                    <option value="100000-300000">$100,000 - $300,000</option>
-                    <option value="300000-500000">$300,000 - $500,000</option>
-                    <option value="500000+">$500,000+</option>
-                  </select>
-                </div>
-                <div className="col-span-1">
-                  <button className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    {t('search')}
-                  </button>
-                </div>
-              </div>
-            </div>
+            <SearchBar />
           </div>
         </div>
       </div>

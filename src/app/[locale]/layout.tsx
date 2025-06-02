@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function LocaleLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
         <NextIntlClientProvider locale={locale}>
           <div className="flex flex-col min-h-screen">
+            <Navbar />
             <main className="flex-grow">
               {children}
             </main>

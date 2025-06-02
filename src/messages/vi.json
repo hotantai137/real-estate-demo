@@ -27,6 +27,7 @@
   },
   "property": {
     "title": "Chi tiết bất động sản",
+    "property_details": "Chi tiết bất động sản",
     "price": "Giá",
     "area": "Diện tích",
     "location": "Vị trí",
@@ -37,7 +38,15 @@
     "features": "Tính năng",
     "contact_agent": "Liên hệ môi giới",
     "similar": "Bất động sản tương tự",
-    "view_details": "Xem chi tiết"
+    "view_details": "Xem chi tiết",
+    "types": {
+      "house": "Nhà ở",
+      "apartment": "Căn hộ",
+      "villa": "Biệt thự",
+      "project": "Dự án",
+      "land": "Đất",
+      "commercial": "Thương mại"
+    }
   },
   "search": {
     "title": "Tìm kiếm bất động sản",
@@ -91,5 +100,32 @@
     "best_price_desc": "Nhận được những giao dịch tốt nhất và giá cạnh tranh cho bất động sản mơ ước của bạn",
     "trusted": "Dịch Vụ Đáng Tin Cậy",
     "trusted_desc": "Dịch vụ chuyên nghiệp và đáng tin cậy từ đội ngũ giàu kinh nghiệm của chúng tôi"
+  },
+  "footer": {
+    "company": {
+      "title": "RealEstate",
+      "description": "Đối tác tin cậy của bạn trong việc tìm kiếm bất động sản hoàn hảo. Chúng tôi cung cấp dịch vụ bất động sản toàn diện với sự hài lòng của khách hàng là trọng tâm."
+    },
+    "quick_links": {
+      "title": "Liên kết nhanh",
+      "home": "Trang chủ",
+      "properties": "Bất động sản",
+      "about": "Giới thiệu",
+      "news": "Tin tức",
+      "contact": "Liên hệ"
+    },
+    "contact": {
+      "title": "Liên hệ",
+      "address": "123 Đường Bất Động Sản, Thành phố, Quốc gia",
+      "email": "info@realestate.com",
+      "phone": "+84 123 456 789"
+    },
+    "newsletter": {
+      "title": "Bản tin",
+      "description": "Đăng ký nhận bản tin để nhận thông tin cập nhật về bất động sản mới và tin tức thị trường.",
+      "placeholder": "Nhập email của bạn",
+      "subscribe": "Đăng ký"
+    },
+    "copyright": "© 2024 RealEstate. Đã đăng ký bản quyền."
   }
 } 
