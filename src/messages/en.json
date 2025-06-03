@@ -141,5 +141,33 @@
     "residential": "Residential",
     "commercial": "Commercial",
     "land": "Land"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "description": "Have questions about our properties or services? We're here to help! Fill out the form below and we'll get back to you as soon as possible.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "123 Real Estate Street, City, Country",
+      "email": "info@realestate.com",
+      "phone": "+1 234 567 890",
+      "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
+    },
+    "office": {
+      "title": "Our Office",
+      "hanoi": "Hanoi Office",
+      "hcm": "Ho Chi Minh City Office",
+      "danang": "Da Nang Office"
+    }
   }
 } 

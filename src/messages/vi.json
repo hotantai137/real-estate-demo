@@ -141,5 +141,33 @@
     "residential": "Nhà Ở",
     "commercial": "Thương Mại",
     "land": "Đất"
+  },
+  "contact": {
+    "title": "Liên Hệ",
+    "subtitle": "Liên hệ với đội ngũ của chúng tôi",
+    "description": "Có thắc mắc về bất động sản hoặc dịch vụ của chúng tôi? Chúng tôi luôn sẵn sàng hỗ trợ! Điền vào mẫu dưới đây và chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.",
+    "form": {
+      "name": "Họ và tên",
+      "email": "Địa chỉ email",
+      "phone": "Số điện thoại",
+      "subject": "Tiêu đề",
+      "message": "Nội dung tin nhắn",
+      "submit": "Gửi tin nhắn",
+      "success": "Gửi tin nhắn thành công!",
+      "error": "Gửi tin nhắn thất bại. Vui lòng thử lại."
+    },
+    "info": {
+      "title": "Thông Tin Liên Hệ",
+      "address": "123 Đường Bất Động Sản, Thành phố, Quốc gia",
+      "email": "info@realestate.com",
+      "phone": "+84 123 456 789",
+      "hours": "Thứ Hai - Thứ Sáu: 9:00 - 18:00"
+    },
+    "office": {
+      "title": "Văn Phòng Của Chúng Tôi",
+      "hanoi": "Văn Phòng Hà Nội",
+      "hcm": "Văn Phòng TP. Hồ Chí Minh",
+      "danang": "Văn Phòng Đà Nẵng"
+    }
   }
 } 

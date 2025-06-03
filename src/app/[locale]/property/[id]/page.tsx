@@ -2,14 +2,16 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { getPropertyById } from '@/data/properties';
 import { notFound } from 'next/navigation';
+import { use } from 'react';
 
-export default function PropertyDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface Props {
+  params: Promise<{ id: string }>;
+}
+
+export default function PropertyDetailPage({ params }: Props) {
   const t = useTranslations('property');
-  const property = getPropertyById(params.id);
+  const { id } = use(params);
+  const property = getPropertyById(id);
 
   if (!property) {
     notFound();
@@ -24,7 +26,7 @@ export default function PropertyDetailPage({
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 py-8">
+    <main className="min-h-screen bg-gray-50 py-8 mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Property Title and Price */}
         <div className="mb-8">

@@ -324,7 +324,8 @@ export const getMostViewedProperties = () => {
 };
 
 export const getPropertyById = (id: string) => {
-  return properties.find(property => property.id === id);
+  const property = properties.find(property => property.id === id);
+  return property; // Make it a real async "thenable"
 };
 
 export const searchProperties = (filters: {

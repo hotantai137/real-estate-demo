@@ -1,18 +1,18 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl'; 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
 import { getNewsById, getRelatedNews } from '@/data/news';
 import { notFound } from 'next/navigation';
+import { use } from 'react';
 
-export default function NewsDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface Props {
+  params: Promise<{ id: string }>;
+}
+
+export default function NewsDetailPage({ params }: Props) {
   const t = useTranslations('news');
-  const locale = useLocale();
-  const article = getNewsById(params.id);
+  const { id } = use(params);
+  const article = getNewsById(id);
 
   if (!article) {
     notFound();
@@ -93,7 +93,7 @@ export default function NewsDetailPage({
                 {relatedArticles.map((relatedArticle) => (
                   <Link
                     key={relatedArticle.id}
-                    href={`/${locale}/news/${relatedArticle.id}`}
+                    href={`/news/${relatedArticle.id}`}
                     className="block group"
                   >
                     <div className="flex items-start space-x-4">
