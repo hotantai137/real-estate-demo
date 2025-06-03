@@ -15,10 +15,13 @@ interface SearchBarProps {
   variant?: 'full' | 'simple';
 }
 
+type TabType = 'sale' | 'rent' | 'project';
+
 export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: SearchBarProps) {
   const [location, setLocation] = useState('Hồ Chí Minh');
   const [inputValue, setInputValue] = useState('');
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>('sale');
   const router = useRouter();
 
   // Dropdown states for full mode
@@ -69,30 +72,57 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
     }
   }, [showLocationDropdown, variant]);
 
+  const handleTabClick = (tab: TabType) => {
+    setActiveTab(tab);
+    // You can add additional logic here, like changing the search parameters
+    // or redirecting to a different URL based on the selected tab
+  };
+
   return (
-    <div className={variant === 'full' ? 'w-full flex flex-col gap-2 bg-gray-700 rounded-xl shadow-2xl p-6' : 'w-full flex flex-col gap-2'}>
+    <div className={variant === 'full' ? 'w-full max-w-5xl mx-auto flex flex-col gap-1 bg-gray-700 rounded-xl shadow-2xl p-4' : 'w-full max-w-4xl mx-auto flex flex-col gap-1'}>
       {variant === 'full' && (
-        <div className="flex space-x-4 mb-4">
-          <button className={`px-6 py-2 rounded-t-md font-semibold transition-all duration-200 ${'bg-white text-gray-800 shadow'} `}>Nhà đất bán</button>
-          <button className="px-6 py-2 rounded-t-md font-semibold text-white hover:bg-gray-600 transition-all duration-200">Nhà đất cho thuê</button>
-          <button className="px-6 py-2 rounded-t-md font-semibold text-white hover:bg-gray-600 transition-all duration-200">Dự án</button>
+        <div className="flex space-x-2 mb-2">
+          <button 
+            className={`px-3 py-1.5 rounded-t-md text-sm font-semibold transition-all duration-200 ${
+              activeTab === 'sale' ? 'bg-white text-gray-800 shadow' : 'text-white hover:bg-gray-600'
+            }`}
+            onClick={() => handleTabClick('sale')}
+          >
+            Nhà đất bán
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-t-md text-sm font-semibold transition-all duration-200 ${
+              activeTab === 'rent' ? 'bg-white text-gray-800 shadow' : 'text-white hover:bg-gray-600'
+            }`}
+            onClick={() => handleTabClick('rent')}
+          >
+            Nhà đất cho thuê
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-t-md text-sm font-semibold transition-all duration-200 ${
+              activeTab === 'project' ? 'bg-white text-gray-800 shadow' : 'text-white hover:bg-gray-600'
+            }`}
+            onClick={() => handleTabClick('project')}
+          >
+            Dự án
+          </button>
         </div>
       )}
-      <div ref={variant === 'full' ? inputGroupRef : undefined} className={variant === 'full' ? 'relative flex items-center bg-gray-100 rounded-lg px-4 py-2 gap-2 mb-4' : 'flex items-center bg-white rounded-xl shadow px-4 py-2 gap-2 border border-gray-200'}>
+      <div ref={variant === 'full' ? inputGroupRef : undefined} className={variant === 'full' ? 'relative flex items-center bg-gray-100 rounded-lg px-3 py-1.5 gap-2 mb-2' : 'flex items-center bg-white rounded-xl shadow px-3 py-1.5 gap-2 border border-gray-200'}>
         {variant === 'full' && (
-          <div className="relative flex items-center mr-2">
-            <span className="text-xl text-gray-500 mr-2"><svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></span>
+          <div className="relative flex items-center mr-1">
+            <span className="text-lg text-gray-500 mr-1"><svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></span>
             <button
               ref={locationBtnRef}
               type="button"
-              className="font-semibold text-gray-800 flex items-center bg-transparent focus:outline-none"
+              className="font-semibold text-gray-800 flex items-center bg-transparent focus:outline-none text-sm whitespace-nowrap"
               onClick={() => setShowLocationDropdown(v => !v)}
             >
               {location}
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
             {showLocationDropdown && (
-              <div ref={modalRef} className="absolute left-0 top-full z-30" style={modalWidth ? { width: modalWidth } : { minWidth: 320 }}>
+              <div ref={modalRef} className="absolute left-0 top-full z-30" style={modalWidth ? { width: modalWidth } : { minWidth: 240 }}>
                 <LocationModal
                   onClose={() => setShowLocationDropdown(false)}
                   onSelect={loc => {
@@ -104,42 +134,42 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
             )}
           </div>
         )}
-        {variant === 'full' && <span className="mx-2 text-gray-400">|</span>}
+        {variant === 'full' && <span className="mx-1 text-gray-400">|</span>}
         <div className="relative flex-1 flex items-center">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+          <FiSearch className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           <input
-            className={variant === 'full' ? 'w-full pl-10 pr-4 py-2 rounded-lg bg-transparent outline-none text-base placeholder-gray-500' : 'w-full pl-10 pr-4 py-2 rounded-xl bg-transparent outline-none text-lg placeholder-gray-400'}
+            className={variant === 'full' ? 'w-full pl-8 pr-3 py-1.5 rounded-lg bg-transparent outline-none text-sm placeholder-gray-500' : 'w-full pl-8 pr-3 py-1.5 rounded-xl bg-transparent outline-none text-sm placeholder-gray-400'}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
             placeholder={variant === 'full' ? 'Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa' : 'Quận Hải Châu'}
           />
         </div>
         <button
-          className={variant === 'full' ? 'bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold text-base ml-2 transition' : 'bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl font-semibold text-lg ml-2 transition'}
+          className={variant === 'full' ? 'bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg font-semibold text-sm ml-1 transition whitespace-nowrap' : 'bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-xl font-semibold text-sm ml-1 transition whitespace-nowrap'}
           onClick={() => router.push('/search')}
         >
           Tìm kiếm
         </button>
         {variant === 'simple' && (
           <button
-            className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-xl font-semibold text-lg ml-2 flex items-center gap-2 transition"
+            className="bg-teal-500 hover:bg-teal-600 text-white px-3 py-1.5 rounded-xl font-semibold text-sm ml-1 flex items-center gap-1 transition whitespace-nowrap"
             onClick={onMapClick}
           >
-            <FaMapMarkedAlt className="text-xl" />
+            <FaMapMarkedAlt className="text-lg" />
             {mapActive ? 'Đóng bản đồ' : 'Xem bản đồ'}
           </button>
         )}
       </div>
       {variant === 'full' && (
-        <div className="flex gap-4 mt-2">
+        <div className="flex gap-2 mt-1">
           <div className="relative flex-1">
             <button
               ref={propertyTypeBtnRef}
-              className="w-full p-2 rounded border flex items-center justify-between bg-gray-700 text-white"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
               onClick={() => setShowPropertyType(v => !v)}
             >
-              Loại nhà đất
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <span className="truncate">Loại nhà đất</span>
+              <svg className="ml-1 w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
             <PropertyTypeDropdown
               open={showPropertyType}
@@ -154,11 +184,11 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
           <div className="relative flex-1">
             <button
               ref={priceBtnRef}
-              className="w-full p-2 rounded border flex items-center justify-between bg-gray-700 text-white"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
               onClick={() => setShowPrice(v => !v)}
             >
-              Mức giá
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <span className="truncate">Mức giá</span>
+              <svg className="ml-1 w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
             <PriceDropdown
               open={showPrice}
@@ -173,11 +203,11 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
           <div className="relative flex-1">
             <button
               ref={areaBtnRef}
-              className="w-full p-2 rounded border flex items-center justify-between bg-gray-700 text-white"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
               onClick={() => setShowArea(v => !v)}
             >
-              Diện tích
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <span className="truncate">Diện tích</span>
+              <svg className="ml-1 w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
             <AreaDropdown
               open={showArea}

@@ -19,10 +19,7 @@ export default function Navbar() {
 
   // Helper to avoid double locale in URL
   function localeHref(path: string) {
-    if (path.startsWith(`/${locale}/`)) return path;
-    if (path === `/${locale}`) return path;
-    if (path.startsWith('/')) return `/${locale}${path}`;
-    return `/${locale}/${path}`;
+    return path;
   }
 
   return (
@@ -30,7 +27,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href={`/${locale}`} className="text-2xl font-bold text-blue-600">
+            <Link href={localeHref('/')} className="text-2xl font-bold text-blue-600">
               RealEstate
             </Link>
           </div>
@@ -39,7 +36,10 @@ export default function Navbar() {
               {t('home')}
             </Link>
             <Link href={localeHref('/search')} className="text-gray-700 hover:text-blue-600">
-              {t('search')}
+              {t('buy')}
+            </Link>
+            <Link href={localeHref('/search')} className="text-gray-700 hover:text-blue-600">
+              {t('sell')}
             </Link>
             <Link href={localeHref('/news')} className="text-gray-700 hover:text-blue-600">
               {t('news')}

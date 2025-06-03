@@ -17,13 +17,15 @@
     "menu": "Menu",
     "search": "Tìm kiếm bất động sản",
     "latest": "Bất động sản mới nhất",
-    "popular": "Xem nhiều nhất",
+    "popular": "Bất động sản nổi bật",
     "map": "Bản đồ bất động sản",
     "home": "Trang chủ",
     "properties": "Bất động sản",
     "news": "Tin tức",
     "about": "Giới thiệu",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "buy": "Mua nhà",
+    "sell": "Bán nhà"
   },
   "property": {
     "title": "Chi tiết bất động sản",
@@ -85,7 +87,8 @@
     "title": "Tin tức bất động sản",
     "latest": "Tin mới nhất",
     "read_more": "Đọc thêm",
-    "published": "Đăng ngày"
+    "published": "Đăng ngày",
+    "view_all": "Xem tất cả tin tức"
   },
   "about": {
     "title": "Về chúng tôi",
@@ -127,5 +130,16 @@
       "subscribe": "Đăng ký"
     },
     "copyright": "© 2024 RealEstate. Đã đăng ký bản quyền."
+  },
+  "statistics": {
+    "title": "Thống Kê Thị Trường",
+    "price_trends": "Xu Hướng Giá Bất Động Sản",
+    "property_count": "Số Lượng Bất Động Sản Theo Loại",
+    "average_price": "Giá Trung Bình",
+    "minimum_price": "Giá Thấp Nhất",
+    "maximum_price": "Giá Cao Nhất",
+    "residential": "Nhà Ở",
+    "commercial": "Thương Mại",
+    "land": "Đất"
   }
 } 

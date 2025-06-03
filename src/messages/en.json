@@ -23,7 +23,9 @@
     "properties": "Properties",
     "news": "News",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "buy": "Buy",
+    "sell": "Sell"
   },
   "property": {
     "title": "Property Details",
@@ -85,7 +87,8 @@
     "title": "Real Estate News",
     "latest": "Latest News",
     "read_more": "Read More",
-    "published": "Published on"
+    "published": "Published on",
+    "view_all": "View All News"
   },
   "about": {
     "title": "About Us",
@@ -127,5 +130,16 @@
       "subscribe": "Subscribe"
     },
     "copyright": "© 2024 RealEstate. All rights reserved."
+  },
+  "statistics": {
+    "title": "Market Statistics",
+    "price_trends": "Property Price Trends",
+    "property_count": "Property Count by Type",
+    "average_price": "Average Price",
+    "minimum_price": "Minimum Price",
+    "maximum_price": "Maximum Price",
+    "residential": "Residential",
+    "commercial": "Commercial",
+    "land": "Land"
   }
 } 

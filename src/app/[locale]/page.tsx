@@ -1,12 +1,19 @@
 import { useTranslations } from 'next-intl';
 import PropertyCard from '@/components/property/PropertyCard';
 import { getLatestProperties, getMostViewedProperties } from '@/data/properties';
+import { getLatestNews } from '@/data/news';
+import NewsCard from '@/components/news/NewsCard';
+import Statistics from '@/components/statistics/Statistics';
 import SearchBar from '@/components/SearchBar';
+import Link from 'next/link';
 
 export default function Home() {
   const t = useTranslations('navigation');
+  const newsT = useTranslations('news');
+  const statsT = useTranslations('statistics');
   const latestProperties = getLatestProperties();
   const mostViewedProperties = getMostViewedProperties();
+  const latestNews = getLatestNews().slice(0, 3); // Get only 3 latest news articles
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -48,6 +55,27 @@ export default function Home() {
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">{statsT('title')}</h2>
+        <Statistics />
+      </section>
+
+      {/* News Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">{newsT('title')}</h2>
+          <Link href="/news" className="text-blue-600 hover:text-blue-700 font-medium">
+            {newsT('view_all')} →
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {latestNews.map((article) => (
+            <NewsCard key={article.id} article={article} />
+          ))}
         </div>
       </section>
 
