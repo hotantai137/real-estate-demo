@@ -270,35 +270,35 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
         }
     
         // Nếu nhỏ, vẽ mũi tên ra bên phải
-        const offset = 0.08;
-        const outsideX = center.x + offset;
-        const outsideY = center.y;
+        // const offset = 0.08;
+        // const outsideX = center.x + offset;
+        // const outsideY = center.y;
     
-        return (
-          <>
-            {/* Mũi tên từ tâm ra ngoài */}
-            <line
-              x1={center.x}
-              y1={center.y}
-              x2={outsideX}
-              y2={outsideY}
-              stroke="black"
-              strokeWidth={0.005}
-            />
-            {/* Label ở ngoài */}
-            <text
-              x={outsideX + 0.01}
-              y={-outsideY}
-              fontSize={0.035}
-              textAnchor="start"
-              alignmentBaseline="middle"
-              transform="scale(1, -1)"
-              fill="black"
-            >
-              {district.name}
-            </text>
-          </>
-        );
+        // return (
+        //   <>
+        //     {/* Mũi tên từ tâm ra ngoài */}
+        //     <line
+        //       x1={center.x}
+        //       y1={center.y}
+        //       x2={outsideX}
+        //       y2={outsideY}
+        //       stroke="black"
+        //       strokeWidth={0.005}
+        //     />
+        //     {/* Label ở ngoài */}
+        //     <text
+        //       x={outsideX + 0.01}
+        //       y={-outsideY}
+        //       fontSize={0.035}
+        //       textAnchor="start"
+        //       alignmentBaseline="middle"
+        //       transform="scale(1, -1)"
+        //       fill="black"
+        //     >
+        //       {district.name}
+        //     </text>
+        //   </>
+        // );
       };
       const renderLabel2 = (district: DistrictData) => {
         const center = centers[district.name];

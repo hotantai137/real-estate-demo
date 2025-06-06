@@ -45,7 +45,7 @@ export default function Home() {
       </div>
 
       <div className="p-4 max-w-4xl mx-auto">
-        <h1 className="text-xl font-bold mb-4">Bản đồ Việt Nam (SVG)</h1>
+        <h1 className="text-xl font-bold mb-4">Bản đồ Việt Nam</h1>
         <VietNamMapSVG />
       </div>
 
