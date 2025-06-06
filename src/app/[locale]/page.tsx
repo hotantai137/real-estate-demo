@@ -6,6 +6,8 @@ import NewsCard from '@/components/news/NewsCard';
 import Statistics from '@/components/statistics/Statistics';
 import SearchBar from '@/components/SearchBar';
 import Link from 'next/link';
+import MapWrapper from '@/components/MapWrapper';
+import VietNamMapSVG from '@/components/VietNamMapSVG';
 
 export default function Home() {
   const t = useTranslations('navigation');
@@ -34,6 +36,17 @@ export default function Home() {
             <SearchBar />
           </div>
         </div>
+      </div>
+
+      {/* Viet Nam Map */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Viet Nam Map</h2>
+        <MapWrapper />
+      </div>
+
+      <div className="p-4 max-w-4xl mx-auto">
+        <h1 className="text-xl font-bold mb-4">Bản đồ Việt Nam (SVG)</h1>
+        <VietNamMapSVG />
       </div>
 
       {/* Latest Properties Section */}

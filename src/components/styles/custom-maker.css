@@ -1,0 +1,45 @@
+/* CustomMarker.css */
+.marker-wrapper {
+    text-align: center;
+    transform: translateY(-10px);
+  }
+  
+  .marker-icon {
+    width: 30px;
+    height: auto;
+  }
+  
+  .price-label {
+    background: #1f2937;
+    color: white;
+    border-radius: 12px;
+    padding: 2px 6px;
+    font-size: 12px;
+    margin-top: 2px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  }
+  
+  .bounce {
+    animation: bounce 0.8s infinite;
+  }
+  
+  @keyframes bounce {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .popup-content {
+    text-align: center;
+  }
+  
+  .popup-content button {
+    margin-top: 5px;
+    padding: 4px 8px;
+    background: #1d4ed8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
