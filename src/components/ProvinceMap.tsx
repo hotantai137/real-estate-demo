@@ -415,7 +415,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
             );
         })}
         {districts.map((district) => (
-            <React.Fragment key={district.name}>{renderLabel2(district)}</React.Fragment>
+            <React.Fragment key={district.name}>{renderLabel(district)}</React.Fragment>
       ))}
       </svg>
   );
