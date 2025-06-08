@@ -1,4 +1,5 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+"use client";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Property } from '@/data/properties';
@@ -6,7 +7,6 @@ import React, { useEffect } from 'react';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
-import { useMap } from 'react-leaflet';
 
 // Fix default marker icon issue with leaflet in React
 const markerIcon2x = require('leaflet/dist/images/marker-icon-2x.png');
@@ -29,11 +29,15 @@ interface MapViewProps {
   districts?: any[];
 }
 
+// Custom MarkerCluster component
 function MarkerCluster({ center }: { center: [number, number] }) {
   const map = useMap();
 
   useEffect(() => {
+    // Create a marker cluster group
     const markerClusterGroup = L.markerClusterGroup();
+
+    // Add random markers
     Array.from({ length: 50 }).forEach((_, index) => {
       const marker = L.marker([center[0] + Math.random() * 0.1, center[1] + Math.random() * 0.1], {
         icon: L.icon({
@@ -45,7 +49,11 @@ function MarkerCluster({ center }: { center: [number, number] }) {
       });
       markerClusterGroup.addLayer(marker);
     });
+
+    // Add the cluster group to the map
     map.addLayer(markerClusterGroup);
+
+    // Cleanup on unmount
     return () => {
       map.removeLayer(markerClusterGroup);
     };
@@ -55,6 +63,11 @@ function MarkerCluster({ center }: { center: [number, number] }) {
 }
 
 export default function MapViewClient({ properties, provinces, districts, center, zoom }: MapViewProps) {
+  // Check if running on the client side
+  if (typeof window === 'undefined') {
+    return null; // Return null during SSR
+  }
+
   console.log(center);
   return (
     <MapContainer
