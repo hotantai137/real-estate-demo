@@ -10,6 +10,15 @@ const config: NextConfig = {
       },
     ],
   },
+  transpilePackages: ["react-leaflet-cluster"],
+  // webpack(config) {
+  //   config.module.rules.push({
+  //     test: /\.css$/,
+  //     include: /node_modules/,
+  //     use: ['style-loader', 'css-loader'],
+  //   });
+  //   return config;
+  // },
 };
 
 const withNextIntl = createNextIntlPlugin();

@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+
+import React, { useMemo, useState, useEffect } from "react";
 import { provinces } from "../data/provinces";
 import ProvinceMap from "./ProvinceMap";
 import "./styles/map.css";
@@ -8,6 +8,8 @@ export interface Province {
   id: string;
   name: string;
   path: string;
+  avgPrice?: number;
+  change?: number;
 }
 
 interface DistrictData {
@@ -17,14 +19,28 @@ interface DistrictData {
   type: string;
   path: string;
 }
-const VietNamMapSVG: React.FC = () => {
+
+interface VietNamMapSVGProps {
+  isShowProvinceList?: boolean;
+}
+
+// Mock data for province prices
+const provincePrices: Record<string, { avgPrice: number; change: number }> = {
+  "Hà Nội": { avgPrice: 58.2, change: 4.2 },
+  "TP. Hồ Chí Minh": { avgPrice: 62.5, change: 3.8 },
+  "Đà Nẵng": { avgPrice: 45.8, change: 5.1 },
+  // Add more provinces as needed
+};
+
+const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true }) => {
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [districts, setDistricts] = useState<DistrictData[]>([]);
   const [mainAnim, setMainAnim] = useState(false);
   const [provinceAnim, setProvinceAnim] = useState<"in" | "out" | null>(null);
+  const [hoveredProvince, setHoveredProvince] = useState<string | null>(null);
 
   const handleProvinceClick = async (province: string) => {
-    setMainAnim(true); // Animate main map out
+    setMainAnim(true);
     setTimeout(async () => {
       const res = await fetch("/data/districts.json");
       const data = await res.json();
@@ -37,38 +53,56 @@ const VietNamMapSVG: React.FC = () => {
       setProvinceAnim("in");
     }, 600);
   };
+
   const handleBack = () => {
-    setProvinceAnim("out"); // Animate province map out
+    setProvinceAnim("out");
     setTimeout(() => {
       setSelectedProvince(null);
       setProvinceAnim(null);
     }, 600);
-  };
+  };  
+
   return (
-    //create a container width two columns left is map and right is list province
-    <div className="flex flex-row items-center justify-center">
+    <div className="flex flex-row items-center justify-center relative">
       <div className="map-container flex justify-center items-center w-1/2 bg-gray-100">
         {!selectedProvince && (
           <svg
-            viewBox="0 0 900 1100"
+            viewBox={`0 0 ${isShowProvinceList ? "900" : "1500"} ${isShowProvinceList ? "1100" : "1000"}`}
             xmlns="http://www.w3.org/2000/svg"
             style={{ width: "100%", height: "auto" }}
             className={`main-map${mainAnim ? " animate-out" : ""}`}
           >
             <g transform="scale(1)">
-              {provinces.map((province) => (
-                <path
-                  key={province.id}
-                  d={province.path}
-                  fill="#d9d9d9"
-                  stroke="#555"
-                  strokeWidth={0.5}
-                  onClick={() => handleProvinceClick(province.name)}
-                  className="fill-gray-300 stroke-gray-500 hover:fill-green-400 transition-colors cursor-pointer"
-                >
-                  <title>{province.name}</title>
-                </path>
-              ))}
+              {provinces.map((province) => {
+                const priceData = provincePrices[province.name];
+                return (
+                  <g key={province.id}>
+                    <path
+                      d={province.path}
+                      fill={hoveredProvince === province.name ? "#4ade80" : "#d9d9d9"}
+                      stroke="#555"
+                      strokeWidth={0.5}
+                      onClick={() => handleProvinceClick(province.name)}
+                      onMouseEnter={() => setHoveredProvince(province.name)}
+                      onMouseLeave={() => setHoveredProvince(null)}
+                      className="transition-colors cursor-pointer"
+                    >
+                      <title>{province.name}</title>
+                    </path>
+                    {priceData && (
+                      <text
+                        x={province.path.split(" ")[1]}
+                        y={province.path.split(" ")[2]}
+                        className="text-xs font-medium fill-gray-700"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                      >
+                        {priceData.avgPrice}tr/m²
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
             </g>
           </svg>
         )}
@@ -89,22 +123,9 @@ const VietNamMapSVG: React.FC = () => {
             >
               Back To Viet Nam Map
             </button>
-            <ProvinceMap districts={districts} />
+            <ProvinceMap districts={districts} province={selectedProvince} />
           </div>
         )}
-      </div>
-      <div className="w-1/2 overflow-y-scroll h-[650px]">
-        <div className="grid grid-cols-3 gap-x-2 gap-y-4">
-          {provinces.map((province) => (
-            <button
-              key={province.id}
-              className="bg-gray-200 text-cyan-700 hover:bg-amber-200 rounded-md cursor-pointer"
-              onClick={() => handleProvinceClick(province.name)}
-            >
-              {province.name}
-            </button>
-          ))}
-        </div>
       </div>
     </div>
   );

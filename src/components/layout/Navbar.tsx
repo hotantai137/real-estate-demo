@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link href={localeHref('/')} className="text-gray-700 hover:text-blue-600">
               {t('home')}
             </Link>
-            <Link href={localeHref('/search')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/map')} className="text-gray-700 hover:text-blue-600">
               {t('buy')}
             </Link>
             <Link href={localeHref('/search')} className="text-gray-700 hover:text-blue-600">

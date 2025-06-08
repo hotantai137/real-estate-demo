@@ -6,6 +6,8 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
+import 'leaflet/dist/leaflet.css';
+import '@/styles/leaflet-cluster.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -1,6 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import svgPathBounds from "svg-path-bounds";
 import { svgPathProperties } from 'svg-path-properties'
+import dynamic from 'next/dynamic';
+import MapViewClient from "./MapViewClient";
+
+const MapView = dynamic(() => import('./MapView'), {
+  ssr: false,
+  loading: () => <div>Loading map...</div>
+});
 
 type Direction = 'left' | 'right' | 'top' | 'bottom';
 type District = {
@@ -19,6 +27,7 @@ interface DistrictData {
 }
 
 interface ProvinceMapProps {
+  province: string;
   districts: DistrictData[];
   width?: number;
   height?: number;
@@ -163,13 +172,47 @@ function calculateViewBoxFromPaths(districts: { path: string }[]): string {
     return { x: midpoint.x, y: midpoint.y }
   }
 
-const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, height = 600 }) => {
+const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 576, height = 600 }) => {
     const viewBox = calculateViewBoxFromPaths(districts);
     const [minX, minY, vbWidth, vbHeight] = viewBox.split(' ').map(Number);
     const viewBoxObj = { width: vbWidth, height: vbHeight };
     const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
     const [smallDistricts, setSmallDistricts] = useState<Record<string, boolean>>({});
     const [centers, setCenters] = useState<Record<string, { x: number; y: number }>>({});
+    const [allProvinces, setAllProvinces] = useState<any[]>([]);
+    const [provinceWithDistricts, setProvinceWithDistricts] = useState<any[]>([]);
+    const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+    const [districtCenter, setDistrictCenter] = useState<{ lat: number; lon: number } | null>(null);
+    
+    useEffect(() => {
+      fetch("/data/vietnam.json")
+        .then(res => res.json())
+        .then(data => {
+          const elements = data.elements;
+          setAllProvinces(elements);
+          const relationElements = data.elements.filter((element: any) => element.type === 'relation');
+          const provinces = elements.filter((element: any) => element.tags.admin_level === '4').map((element: any) => {
+            const memberRelations = element.members.filter((member: any) => member.type === 'relation');
+            const memberWays = element.members.filter((member: any) => member.type === 'way');
+            const memberNodes = element.members.filter((member: any) => member.type === 'node');
+            const memberRelationsRef = memberRelations.map((member: any) => member.ref).join(',');
+            const memberRelationsData = relationElements.filter((relation: any) => memberRelationsRef.includes(relation.id));
+            return {
+              type: element.type,
+              id: element.id,
+              center: element.center,
+              tags: element.tags,
+              members: memberRelationsData.map((relation: any) => ({
+                type: relation.type,
+                center: relation.center,
+                tags: relation.tags,
+              }))
+            };
+          });
+          setProvinceWithDistricts(provinces);
+          console.log(provinces);
+        });
+    }, []);
 
     useEffect(() => {
         const newSmall: Record<string, boolean> = {};
@@ -190,6 +233,14 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
         setCenters(newCenters);
       }, [districts]);
 
+      const handleDistrictClick = async (district: any) => {
+        console.log(district);
+        setSelectedDistrict(district);
+        const provinceselected = allProvinces.find((province: any) => province.tags.name.toLowerCase() === (`${district.type} ${district.name}`).toLowerCase());
+        console.log(provinceselected);
+        setDistrictCenter(provinceselected.center);
+      };
+    
       const renderDistrictLabel = (
         d: string,
         name: string,
@@ -376,8 +427,22 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
           </g>
         );
       };
+
+      const displayProvinces = useMemo(() => {
+        return provinceWithDistricts.map((province: any) => (
+          <div key={province.id}>
+            <button
+              className="bg-gray-200 text-cyan-700 hover:bg-amber-200 rounded-md cursor-pointer"
+              onClick={() => handleDistrictClick(province)}
+            >
+              {province.tags.name}
+            </button>
+          </div>
+        ));
+      }, [provinceWithDistricts]);
   return (
-      <svg
+    <>
+      {!selectedDistrict && <svg
         width={width}
         height={height}
         viewBox={viewBox}
@@ -396,6 +461,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
                 fill="#a0d2eb"
                 ref={el => { pathRefs.current[district.name] = el; }}
                 className="hover:fill-green-400 transition-colors cursor-pointer"
+                onClick={() => handleDistrictClick(district)}
                 />
                 {/* {renderDistrictLabel(district.path, district.name, viewBoxObj)} */}
                 {/* {center && (
@@ -418,6 +484,14 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ districts, width = 576, heigh
             <React.Fragment key={district.name}>{renderLabel(district)}</React.Fragment>
       ))}
       </svg>
+    }
+
+      {selectedDistrict && districtCenter && districtCenter.lat && districtCenter.lon && (
+        <div>
+          <MapViewClient center={[districtCenter.lat, districtCenter.lon]} zoom={11} />
+        </div>
+      )}
+    </>
   );
 };
 
