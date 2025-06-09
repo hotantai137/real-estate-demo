@@ -30,7 +30,6 @@ interface MapViewProps {
   districts?: any[];
 }
 
-// Custom MarkerCluster component
 function MarkerCluster({ center }: { center: [number, number] }) {
   const map = useMap();
   const [idxMarkerSelected, setIdxMarkerSelected] = useState<string | null>(null);
@@ -155,13 +154,12 @@ function MarkerCluster({ center }: { center: [number, number] }) {
   return null;
 }
 
-export default function MapViewClient({ properties, provinces, districts, center, zoom }: MapViewProps) {
+export default function MapViewClient2({ properties, provinces, districts, center, zoom }: MapViewProps) {
   // Check if running on the client side
   if (typeof window === 'undefined') {
     return null; // Return null during SSR
   }
 
-  console.log(center);
   return (
     <MapContainer
       center={center}
@@ -189,4 +187,4 @@ export default function MapViewClient({ properties, provinces, districts, center
       ))}
     </MapContainer>
   );
-}
+} 

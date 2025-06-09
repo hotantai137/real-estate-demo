@@ -1,5 +1,7 @@
-"use client";
+'use client';
+
 import dynamic from 'next/dynamic';
+import MapViewClient2 from './MapViewClient2';
 
 // Dynamically import MapViewClient with SSR disabled
 const MapViewClient = dynamic(() => import('./MapViewClient'), { ssr: false });
@@ -13,5 +15,5 @@ interface MapViewProps {
 }
 
 export default function MapView(props: MapViewProps) {
-  return <MapViewClient {...props} />;
+  return <MapViewClient2 {...props} />;
 }

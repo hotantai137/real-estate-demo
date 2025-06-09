@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import svgPathBounds from "svg-path-bounds";
 import { svgPathProperties } from 'svg-path-properties'
 import dynamic from 'next/dynamic';
-import MapViewClient from "./MapViewClient";
 
 const MapView = dynamic(() => import('./MapView'), {
   ssr: false,
@@ -488,7 +487,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
 
       {selectedDistrict && districtCenter && districtCenter.lat && districtCenter.lon && (
         <div>
-          <MapViewClient center={[districtCenter.lat, districtCenter.lon]} zoom={11} />
+          <MapView center={[districtCenter.lat, districtCenter.lon]} zoom={11} />
         </div>
       )}
     </>
