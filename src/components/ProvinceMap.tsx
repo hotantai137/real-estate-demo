@@ -30,6 +30,7 @@ interface ProvinceMapProps {
   districts: DistrictData[];
   width?: number;
   height?: number;
+  onDistrictClick?: (district: any) => void;
 }
 
 const SMALL_THRESHOLD = 0.015;
@@ -171,7 +172,7 @@ function calculateViewBoxFromPaths(districts: { path: string }[]): string {
     return { x: midpoint.x, y: midpoint.y }
   }
 
-const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 576, height = 600 }) => {
+const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 576, height = 600, onDistrictClick }) => {
     const viewBox = calculateViewBoxFromPaths(districts);
     const [minX, minY, vbWidth, vbHeight] = viewBox.split(' ').map(Number);
     const viewBoxObj = { width: vbWidth, height: vbHeight };
@@ -232,13 +233,13 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
         setCenters(newCenters);
       }, [districts]);
 
-      const handleDistrictClick = async (district: any) => {
-        console.log(district);
-        setSelectedDistrict(district);
-        const provinceselected = allProvinces.find((province: any) => province.tags.name.toLowerCase() === (`${district.type} ${district.name}`).toLowerCase());
-        console.log(provinceselected);
-        setDistrictCenter(provinceselected.center);
-      };
+      // const handleDistrictClick = async (district: any) => {
+      //   onDistrictClick?.(district);
+      //   setSelectedDistrict(district);
+      //   const provinceselected = allProvinces.find((province: any) => province.tags.name.toLowerCase() === (`${district.type} ${district.name}`).toLowerCase());
+      //   console.log(provinceselected);
+      //   setDistrictCenter(provinceselected.center);
+      // };
     
       const renderDistrictLabel = (
         d: string,
@@ -427,26 +428,26 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
         );
       };
 
-      const displayProvinces = useMemo(() => {
-        return provinceWithDistricts.map((province: any) => (
-          <div key={province.id}>
-            <button
-              className="bg-gray-200 text-cyan-700 hover:bg-amber-200 rounded-md cursor-pointer"
-              onClick={() => handleDistrictClick(province)}
-            >
-              {province.tags.name}
-            </button>
-          </div>
-        ));
-      }, [provinceWithDistricts]);
+      // const displayProvinces = useMemo(() => {
+      //   return provinceWithDistricts.map((province: any) => (
+      //     <div key={province.id}>
+      //       <button
+      //         className="bg-gray-200 text-cyan-700 hover:bg-amber-200 rounded-md cursor-pointer"
+      //         onClick={() => handleDistrictClick(province)}
+      //       >
+      //         {province.tags.name}
+      //       </button>
+      //     </div>
+      //   ));
+      // }, [provinceWithDistricts]);
   return (
     <>
-      {!selectedDistrict && <svg
+      <svg
         width={width}
-        height={height}
+        // height={height}
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
-        className="transform rotate-x-180"
+        className="h-full w-full pt-10 transform rotate-x-180"
         xmlns="http://www.w3.org/2000/svg"
       >
         {districts.map((district) => {
@@ -460,7 +461,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
                 fill="#a0d2eb"
                 ref={el => { pathRefs.current[district.name] = el; }}
                 className="hover:fill-green-400 transition-colors cursor-pointer"
-                onClick={() => handleDistrictClick(district)}
+                onClick={() => onDistrictClick?.(district)}
                 />
                 {/* {renderDistrictLabel(district.path, district.name, viewBoxObj)} */}
                 {/* {center && (
@@ -483,13 +484,12 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
             <React.Fragment key={district.name}>{renderLabel(district)}</React.Fragment>
       ))}
       </svg>
-    }
 
-      {selectedDistrict && districtCenter && districtCenter.lat && districtCenter.lon && (
+      {/* {selectedDistrict && districtCenter && districtCenter.lat && districtCenter.lon && (
         <div>
-          <MapView center={[districtCenter.lat, districtCenter.lon]} zoom={11} />
+          <MapView center={[districtCenter.lat, districtCenter.lon]} zoom={14} />
         </div>
-      )}
+      )} */}
     </>
   );
 };

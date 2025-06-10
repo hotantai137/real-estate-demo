@@ -102,4 +102,33 @@ const HouseMarker = ({ id, position, name, type, price, onViewDetail }: HouseMar
   );
 };
 
+export function getHouseMarkerHTML({ id, name, type, price }: { id: string, name: string, type: 'residential' | 'house' | 'building', price: number }) {
+  const image = type === 'residential' ? './residential.png' : type === 'house' ? './house.png' : './building.png';
+  return `
+    <div class="marker-container" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    ">
+      <img src="${image}" 
+           style="width: 45px; height: 50px;" />
+      <div class="marker-label" style="
+        background: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        font-size: 12px;
+        white-space: nowrap;
+        margin-top: 4px;
+        text-align: center;
+        width: fit-content;
+      ">
+        <div style="font-weight: bold; color: #1a56db;">${name}</div>
+        <div style="color: #dc2626;">$${price}</div>
+      </div>
+    </div>
+  `;
+}
+
 export default HouseMarker;

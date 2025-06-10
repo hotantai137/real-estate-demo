@@ -60,7 +60,7 @@ export default function SearchPage() {
           <aside className={showMap ? 'flex-1 h-full min-h-[900px] p-0 m-0' : 'w-full lg:w-80 flex-shrink-0'}>
             {showMap ? (
               <div className="w-full h-full min-h-[100vw]">
-                <MapView properties={propertyList} />
+                {/* <MapView properties={propertyList} /> */}
               </div>
             ) : (
               <>

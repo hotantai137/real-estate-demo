@@ -134,10 +134,19 @@ function MarkerCluster({ center }: { center: [number, number] }) {
         </div>
       `);
 
-      // Add click handler
-      marker.on('click', () => {
-        setIdxMarkerSelected(markerData.id);
-      });
+      // // Add click handler for bounce animation
+      // marker.on('click', () => {
+      //   setIdxMarkerSelected(markerData.id);
+
+      //   // Lấy DOM element của marker
+      //   const markerElem = marker.getElement();
+      //   if (markerElem) {
+      //     markerElem.classList.add('bounce');
+      //     setTimeout(() => {
+      //       markerElem.classList.remove('bounce');
+      //     }, 1000); // thời gian animation
+      //   }
+      // });
 
       markerClusterGroup.addLayer(marker);
     });
@@ -164,9 +173,11 @@ export default function MapViewClient2({ properties, provinces, districts, cente
     <MapContainer
       center={center}
       zoom={zoom}
+      minZoom={13}
+      maxZoom={18}
       scrollWheelZoom={true}
       style={{ width: '100%', minHeight: 500, borderRadius: 16 }}
-      className="shadow-xl"
+      className="shadow-xl leaflet-right-controls"
     >
       <TileLayer
         attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

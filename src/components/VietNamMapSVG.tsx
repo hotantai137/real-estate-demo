@@ -23,6 +23,9 @@ interface DistrictData {
 
 interface VietNamMapSVGProps {
   isShowProvinceList?: boolean;
+  width?: number;
+  height?: number;
+  onDistrictClick?: (district: any) => void;
 }
 
 // Mock data for province prices
@@ -33,7 +36,7 @@ const provincePrices: Record<string, { avgPrice: number; change: number }> = {
   // Add more provinces as needed
 };
 
-const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true }) => {
+const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true, width = 576, height = 600, onDistrictClick }) => {
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [districts, setDistricts] = useState<DistrictData[]>([]);
   const [mainAnim, setMainAnim] = useState(false);
@@ -64,13 +67,13 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
   };  
 
   return (
-    <div className="flex flex-row items-center justify-center relative">
-      <div className="map-container flex justify-center items-center w-1/2 bg-gray-100">
+    <div className={`flex flex-row items-center justify-center relative`}
+    style={{width: `${width}px`, height: `${height}px`}}>
+      <div className={`map-container flex justify-center items-center w-full h-full`}>
         {!selectedProvince && (
           <svg
             viewBox={`0 0 ${isShowProvinceList ? "900" : "1500"} ${isShowProvinceList ? "1100" : "1000"}`}
             xmlns="http://www.w3.org/2000/svg"
-            style={{ width: "100%", height: "auto" }}
             className={`main-map${mainAnim ? " animate-out" : ""}`}
           >
             <g transform="scale(1)">
@@ -118,13 +121,13 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
                 : "")
             }
           >
-            <button
+            {/* <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
               onClick={handleBack}
             >
               Back To Viet Nam Map
-            </button>
-            <ProvinceMap districts={districts} province={selectedProvince} />
+            </button> */}
+            <ProvinceMap districts={districts} province={selectedProvince} onDistrictClick={onDistrictClick} />
           </div>
         )}
       </div>

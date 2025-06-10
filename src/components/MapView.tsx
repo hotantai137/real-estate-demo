@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import MapViewClient2 from './MapViewClient2';
 
 // Dynamically import MapViewClient with SSR disabled
-const MapViewClient = dynamic(() => import('./MapViewClient'), { ssr: false });
+const MapViewClient = dynamic(() => import('./MapViewClient2'), { ssr: false });
 
 interface MapViewProps {
   center: [number, number];
@@ -15,5 +15,5 @@ interface MapViewProps {
 }
 
 export default function MapView(props: MapViewProps) {
-  return <MapViewClient2 {...props} />;
+  return <MapViewClient {...props} />;
 }

@@ -61,3 +61,11 @@ body {
   max-width: 400px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
+
+/* Đây là class bạn tự đặt cho MapContainer */
+.leaflet-right-controls .leaflet-top.leaflet-left {
+  left: auto !important;
+  right: 10px !important;
+}
+
+
