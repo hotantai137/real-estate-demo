@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
+import Image from 'next/image';
 
 export default function Navbar() {
   const t = useTranslations('navigation');
@@ -23,31 +24,31 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+    <nav className="bg-[#11506D] shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex items-center">
+          <div className="flex items-center">            
             <Link href={localeHref('/')} className="text-2xl font-bold text-blue-600">
-              RealEstate
+              <Image src="/goodnha-logo.png" alt="logo" width={100} height={100} />
             </Link>
           </div>
           <div className="flex items-center space-x-8">
-            <Link href={localeHref('/')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/')} className="text-white hover:text-blue-600">
               {t('home')}
             </Link>
-            <Link href={localeHref('/map')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/map')} className="text-white hover:text-blue-600">
               {t('buy')}
             </Link>
-            <Link href={localeHref('/search')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/search')} className="text-white hover:text-blue-600">
               {t('sell')}
             </Link>
-            <Link href={localeHref('/news')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/news')} className="text-white hover:text-blue-600">
               {t('news')}
             </Link>
-            <Link href={localeHref('/about')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/about')} className="text-white hover:text-blue-600">
               {t('about')}
             </Link>
-            <Link href={localeHref('/contact')} className="text-gray-700 hover:text-blue-600">
+            <Link href={localeHref('/contact')} className="text-white hover:text-blue-600">
               {t('contact')}
             </Link>
             <div className="flex items-center space-x-4">

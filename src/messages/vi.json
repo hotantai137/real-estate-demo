@@ -1,6 +1,6 @@
 {
   "common": {
-    "welcome": "Chào mừng đến với RealEstate",
+    "welcome": "Chào mừng đến với goodNha",
     "home": "Trang chủ",
     "about": "Giới thiệu",
     "contact": "Liên hệ",
@@ -106,7 +106,7 @@
   },
   "footer": {
     "company": {
-      "title": "RealEstate",
+      "title": "goodNha",
       "description": "Đối tác tin cậy của bạn trong việc tìm kiếm bất động sản hoàn hảo. Chúng tôi cung cấp dịch vụ bất động sản toàn diện với sự hài lòng của khách hàng là trọng tâm."
     },
     "quick_links": {
@@ -120,7 +120,7 @@
     "contact": {
       "title": "Liên hệ",
       "address": "123 Đường Bất Động Sản, Thành phố, Quốc gia",
-      "email": "info@realestate.com",
+      "email": "info@goodNha.com",
       "phone": "+84 123 456 789"
     },
     "newsletter": {
@@ -129,7 +129,7 @@
       "placeholder": "Nhập email của bạn",
       "subscribe": "Đăng ký"
     },
-    "copyright": "© 2024 RealEstate. Đã đăng ký bản quyền."
+    "copyright": "© 2024 goodNha. Đã đăng ký bản quyền."
   },
   "statistics": {
     "title": "Thống Kê Thị Trường",
@@ -159,7 +159,7 @@
     "info": {
       "title": "Thông Tin Liên Hệ",
       "address": "123 Đường Bất Động Sản, Thành phố, Quốc gia",
-      "email": "info@realestate.com",
+      "email": "info@goodNha.com",
       "phone": "+84 123 456 789",
       "hours": "Thứ Hai - Thứ Sáu: 9:00 - 18:00"
     },

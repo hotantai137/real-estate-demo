@@ -52,7 +52,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Nguyen Van A',
       phone: '+84 123 456 789',
-      email: 'agent@realestate.com',
+      email: 'agent@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e'
     }
   },
@@ -82,7 +82,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Tran Thi B',
       phone: '+84 987 654 321',
-      email: 'agent2@realestate.com',
+      email: 'agent2@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80'
     }
   },
@@ -111,7 +111,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Le Van C',
       phone: '+84 111 222 333',
-      email: 'agent3@realestate.com',
+      email: 'agent3@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167'
     }
   },
@@ -139,7 +139,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Pham Thi D',
       phone: '+84 444 555 666',
-      email: 'agent4@realestate.com',
+      email: 'agent4@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91'
     }
   },
@@ -167,7 +167,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Nguyen Van E',
       phone: '+84 777 888 999',
-      email: 'agent5@realestate.com',
+      email: 'agent5@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1519340333755-c1aa5571fd46'
     }
   },
@@ -195,7 +195,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Tran Thi F',
       phone: '+84 222 333 444',
-      email: 'agent6@realestate.com',
+      email: 'agent6@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e'
     }
   },
@@ -223,7 +223,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Le Van G',
       phone: '+84 555 666 777',
-      email: 'agent7@realestate.com',
+      email: 'agent7@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308'
     }
   },
@@ -251,7 +251,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Pham Thi H',
       phone: '+84 888 999 000',
-      email: 'agent8@realestate.com',
+      email: 'agent8@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d'
     }
   },
@@ -279,7 +279,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Nguyen Van I',
       phone: '+84 333 444 555',
-      email: 'agent9@realestate.com',
+      email: 'agent9@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308'
     }
   },
@@ -307,7 +307,7 @@ export const properties: Property[] = [
     agent: {
       name: 'Tran Thi J',
       phone: '+84 666 777 888',
-      email: 'agent10@realestate.com',
+      email: 'agent10@goodNha.com',
       avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91'
     }
   },

@@ -20,17 +20,14 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section with Search */}
-      <div className="relative bg-blue-600 h-[600px]">
+      <div className="relative  h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('/can-ho-the-gio-riverside-2-1024x576-1.webp')" }}>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
           <div className="w-full">
             <div className="text-white mb-8">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                Find Your Dream Home
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
+                Muốn tìm nhà đến goodNha
               </h1>
-              <p className="text-xl md:text-2xl mb-8">
-                Discover the perfect property that matches your lifestyle
-              </p>
             </div>
             {/* Search Bar */}
             <SearchBar />

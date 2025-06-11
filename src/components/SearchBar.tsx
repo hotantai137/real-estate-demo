@@ -79,7 +79,7 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
   };
 
   return (
-    <div className={variant === 'full' ? 'w-full max-w-5xl mx-auto flex flex-col gap-1 bg-gray-700 rounded-xl shadow-2xl p-4' : 'w-full max-w-4xl mx-auto flex flex-col gap-1'}>
+    <div className={variant === 'full' ? 'w-full max-w-5xl mx-auto flex flex-col gap-1 bg-[#11506D] rounded-xl shadow-2xl p-4' : 'w-full max-w-4xl mx-auto flex flex-col gap-1'}>
       {variant === 'full' && (
         <div className="flex space-x-2 mb-2">
           <button 
@@ -165,7 +165,7 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
           <div className="relative flex-1">
             <button
               ref={propertyTypeBtnRef}
-              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-[#11506D] text-white text-sm"
               onClick={() => setShowPropertyType(v => !v)}
             >
               <span className="truncate">Loại nhà đất</span>
@@ -184,7 +184,7 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
           <div className="relative flex-1">
             <button
               ref={priceBtnRef}
-              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-[#11506D] text-white text-sm"
               onClick={() => setShowPrice(v => !v)}
             >
               <span className="truncate">Mức giá</span>
@@ -203,7 +203,7 @@ export default function SearchBar({ onMapClick, mapActive, variant = 'full' }: S
           <div className="relative flex-1">
             <button
               ref={areaBtnRef}
-              className="w-full p-1.5 rounded border flex items-center justify-between bg-gray-700 text-white text-sm"
+              className="w-full p-1.5 rounded border flex items-center justify-between bg-[#11506D] text-white text-sm"
               onClick={() => setShowArea(v => !v)}
             >
               <span className="truncate">Diện tích</span>

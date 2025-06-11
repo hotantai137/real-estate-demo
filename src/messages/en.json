@@ -1,6 +1,6 @@
 {
   "common": {
-    "welcome": "Welcome to RealEstate",
+    "welcome": "Welcome to goodNha",
     "home": "Home",
     "about": "About",
     "contact": "Contact",
@@ -106,7 +106,7 @@
   },
   "footer": {
     "company": {
-      "title": "RealEstate",
+      "title": "goodNha",
       "description": "Your trusted partner in finding the perfect property. We provide comprehensive real estate services with a focus on customer satisfaction."
     },
     "quick_links": {
@@ -120,7 +120,7 @@
     "contact": {
       "title": "Contact Us",
       "address": "123 Real Estate Street, City, Country",
-      "email": "info@realestate.com",
+      "email": "info@goodNha.com",
       "phone": "+1 234 567 890"
     },
     "newsletter": {
@@ -129,7 +129,7 @@
       "placeholder": "Enter your email",
       "subscribe": "Subscribe"
     },
-    "copyright": "© 2024 RealEstate. All rights reserved."
+    "copyright": "© 2024 goodNha. All rights reserved."
   },
   "statistics": {
     "title": "Market Statistics",
@@ -159,7 +159,7 @@
     "info": {
       "title": "Contact Information",
       "address": "123 Real Estate Street, City, Country",
-      "email": "info@realestate.com",
+      "email": "info@goodNha.com",
       "phone": "+1 234 567 890",
       "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
     },
