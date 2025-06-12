@@ -61,6 +61,17 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
       disableClusteringAtZoom: 16,
     });
 
+    // Track active polygon
+    let activePolygon: L.Polygon | null = null;
+
+    // Function to clean up polygon
+    const cleanupPolygon = () => {
+      if (activePolygon) {
+        map.removeLayer(activePolygon);
+        activePolygon = null;
+      }
+    };
+
     markers.forEach(markerData => {
       const marker = L.marker(markerData.position, markerData.iconDiv ? { icon: markerData.iconDiv } : undefined);
       markerRefs.current[markerData.id] = marker;
@@ -167,6 +178,9 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
 
     // Hàm chỉ add marker phường trong bounds hiện tại
     const addWardMarkersInView = () => {
+      // Clean up any existing polygon when view changes
+      cleanupPolygon();
+      
       const bounds = map.getBounds();
       wardClusterGroup.clearLayers();
       wardsData.forEach(ward => {
@@ -181,33 +195,42 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
               iconAnchor: [40, 80],
             })
           });
-          // Hover: show polygon
-          marker.on('mouseover', () => {
+
+          // Function to handle polygon display
+          const showPolygon = () => {
+            cleanupPolygon(); // Clean up any existing polygon first
             const el = marker.getElement();
             if (el) el.classList.add('ward-marker-hover');
             if (ward.coordinates && ward.coordinates.length > 2) {
-              const polygon = L.polygon(
+              activePolygon = L.polygon(
                 ward.coordinates.map(([lat, lng]: any) => [lat, lng]),
                 { color: '#2563eb', fillColor: '#60a5fa', fillOpacity: 0.2, weight: 2 }
               );
-              polygon.addTo(map);
-              (marker as any)._wardPolygon = polygon;
+              activePolygon.addTo(map);
             }
-          });
-          marker.on('mouseout', () => {
+          };
+
+          // Function to handle polygon cleanup
+          const hidePolygon = () => {
             const el = marker.getElement();
             if (el) el.classList.remove('ward-marker-hover');
-            if ((marker as any)._wardPolygon) {
-              map.removeLayer((marker as any)._wardPolygon);
-              (marker as any)._wardPolygon = null;
-            }
-          });
+            cleanupPolygon();
+          };
 
-          // marker.on('click', () => {
-          //   console.log('Polygon clicked!');
-          //     const latlngs = ward.coordinates.map(([lat, lng]: any) => [lat, lng]);
-          //     map.fitBounds(L.latLngBounds(latlngs), { maxZoom: 17 });
-          // });
+          marker.on('mouseover', showPolygon);
+          marker.on('mouseout', hidePolygon);
+          marker.on('dragstart', hidePolygon);
+          marker.on('drag', hidePolygon);
+          marker.on('dragend', hidePolygon);
+
+          marker.on('click', () => {
+            console.log('Polygon clicked!', ward);
+            map.flyTo(marker.getLatLng(), 17, {
+              duration: 0.8,
+            });
+              // const latlngs = ward.coordinates.map(([lat, lng]: any) => [lat, lng]);
+              // map.fitBounds(L.latLngBounds(latlngs), { maxZoom: 17 });
+          });
           wardClusterGroup.addLayer(marker);
         }
       });
@@ -221,6 +244,7 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
 
         // Hàm xử lý hiển thị layer theo zoom
         const handleZoom = () => {
+          cleanupPolygon(); // Clean up polygon when zooming
           const zoom = map.getZoom();
           if (zoom < 16) {
             map.removeLayer(markerClusterGroup);
@@ -231,6 +255,15 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
           }
         };
 
+        // Cleanup function
+        const cleanup = () => {
+          cleanupPolygon();
+          map.off('zoomend', handleZoom);
+          map.off('moveend', addWardMarkersInView);
+          map.removeLayer(markerClusterGroup);
+          map.removeLayer(wardClusterGroup);
+        };
+
         // Gọi lần đầu khi mount
         handleZoom();
         // Lắng nghe sự kiện zoom
@@ -239,12 +272,7 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
         map.on('moveend', addWardMarkersInView);
 
         // Cleanup
-        return () => {
-          map.off('zoomend', handleZoom);
-          map.off('moveend', addWardMarkersInView);
-          map.removeLayer(markerClusterGroup);
-          map.removeLayer(wardClusterGroup);
-        };
+        return cleanup;
       });
 
     return () => {

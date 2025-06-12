@@ -443,11 +443,9 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
   return (
     <>
       <svg
-        width={width}
-        // height={height}
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
-        className="h-full w-full pt-10 transform rotate-x-180"
+        className="w-[700px] h-[500px] md:w-[900px] md:h-[600px] pt-10 transform rotate-x-180"
         xmlns="http://www.w3.org/2000/svg"
       >
         {districts.map((district) => {

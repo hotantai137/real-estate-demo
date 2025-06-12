@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import VietNamMapSVG from '@/components/VietNamMapSVG';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import MapView from '@/components/MapView';
+import {provinces} from '@/data/provinces';
 
-// Mock data for provinces
 const mockProvinces = [
   {
     id: '1',
@@ -28,6 +28,7 @@ const mockProvinces = [
   // Add more mock data as needed
 ];
 
+
 const propertyTypes = [
   'Chung cư',
   'Nhà riêng',
@@ -38,6 +39,8 @@ const propertyTypes = [
 
 const MapDashboard = () => {
   const [allProvinces, setAllProvinces] = useState<any[]>([]);
+  const [provinces, setProvinces] = useState<any[]>([]);
+  const [districts, setDistricts] = useState<any[]>([]);
   const [provinceWithDistricts, setProvinceWithDistricts] = useState<any[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
@@ -54,7 +57,9 @@ const MapDashboard = () => {
         const elements = data.elements;
         setAllProvinces(elements);
         const relationElements = data.elements.filter((element: any) => element.type === 'relation');
-        const provinces = elements.filter((element: any) => element.tags.admin_level === '4').map((element: any) => {
+        const provicesLv4 = elements.filter((element: any) => element.tags.admin_level === '4')
+        setProvinces(provicesLv4);
+        const provinces = provicesLv4.map((element: any) => {
           const memberRelations = element.members.filter((member: any) => member.type === 'relation');
           const memberWays = element.members.filter((member: any) => member.type === 'way');
           const memberNodes = element.members.filter((member: any) => member.type === 'node');
@@ -66,6 +71,7 @@ const MapDashboard = () => {
             center: element.center,
             tags: element.tags,
             members: memberRelationsData.map((relation: any) => ({
+              id: relation.id,
               type: relation.type,
               center: relation.center,
               tags: relation.tags,
@@ -119,33 +125,46 @@ const MapDashboard = () => {
     }
   };
 
+  const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const provinceId = e.target.value;
+    console.log(provinceId);
+    // setSelectedProvince(provinceName);
+    // setSelectedDistrict(null);
+    // setDistrictCenter(null);
+    // //load districts
+    console.log(provinceWithDistricts);
+    const districts = provinceWithDistricts.find((province: any) => province.id == provinceId);
+    console.log(districts);
+    setDistricts(districts.members);
+  };
+
   return (
     <div className="flex h-screen bg-gray-50 mt-20 relative">
-      {/* Dropdown Tỉnh/Thành */}
+      
       <select
-          className="w-[185px] absolute left-0 top-0 z-[600] p-4 shadow rounded-lg"
+          className="w-[185px] absolute left-0 top-0 z-[600] p-4 shadow rounded-lg hidden md:block"//Hidden when screen is < 768px
           value={selectedProvince || ''}
-          onChange={e => setSelectedProvince(e.target.value)}
+          onChange={(e) => handleProvinceChange(e)}
         >
           <option value="">Tỉnh thành</option>
-          {mockProvinces.map(province => (
-            <option key={province.id} value={province.name}>{province.name}</option>
+          {provinces.map(province => (
+            <option key={province.id} value={province.id}>{province.tags.name}</option>
           ))}
         </select>
-        {/* Dropdown Quận/Huyện */}
         <select
-          className="w-[185px] absolute left-[195px] top-0 z-[600] p-4 shadow rounded-lg"
+          className="w-[185px] absolute left-[195px] top-0 z-[600] p-4 shadow rounded-lg hidden md:block"//Hidden when screen is < 768px
           value={selectedDistrict || ''}
           onChange={e => setSelectedDistrict(e.target.value)}
-          disabled={!selectedProvince}
         >
           <option value="">Quận/huyện</option>
-          {/* Render danh sách quận/huyện dựa trên selectedProvince */}
+          {districts?.map((district: any) => (
+            <option key={district.id} value={district.id}>{district.tags.name}</option>
+          ))}
         </select>
       {/* Sidebar Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className={`absolute transition-all duration-500 ease-in-out ${isSidebarVisible ? 'left-[25%]' : 'left-0'} top-20 p-2 z-[500] bg-white rounded-md shadow-md hover:bg-gray-100 transition-colors}`}
+        className={`hidden md:block absolute transition-all duration-500 ease-in-out ${isSidebarVisible ? 'left-0 md:left-[25%]' : 'left-0'} top-20 p-2 z-[500] bg-white rounded-md shadow-md hover:bg-gray-100 transition-colors}`}
       >
         {isSidebarVisible ? 'Collapse filter' : 'Expand filter'}
       </button>
@@ -160,7 +179,7 @@ const MapDashboard = () => {
         )}
 
       {/* Left Sidebar */}
-      <div className={`z-[500] w-1/4 p-6 rounded-lg bg-gray-100 border-gray-200 overflow-hidden flex flex-col transition-all duration-500 ease-in-out absolute left-0 top-16 bottom-0 ${isSidebarVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} ${isSidebarHidden ? 'hidden' : ''}`}>
+      <div className={`hidden md:flex z-[500] w-1/4 p-6 rounded-lg bg-gray-100 border-gray-200 overflow-hidden flex-col transition-all duration-500 ease-in-out absolute left-0 top-16 bottom-0 ${isSidebarVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} ${isSidebarHidden ? 'hidden' : ''}`}>
         {/* Filters Section */}
         <div className="space-y-4 mb-6">
           {/* Search Input */}
@@ -211,7 +230,7 @@ const MapDashboard = () => {
       </div>
 
       {/* Right Main Area */}
-      {!selectedDistrict && <div className={`flex-1 h-full z-0 pl-[500px] bg-white rounded-lg`}>
+      {!selectedDistrict && <div className={`flex-1 h-full z-0 md:pl-[500px] bg-white rounded-lg`}>
         <TransformWrapper
           initialScale={1}
           minScale={0.5}
@@ -220,7 +239,7 @@ const MapDashboard = () => {
         >
           {({ zoomIn, zoomOut, resetTransform }) => (
             <>
-              <div className="absolute right-4 top-18 z-10 flex gap-2">
+              <div className="hidden md:flex absolute right-4 top-18 z-10  gap-2">
                 <button
                   onClick={() => zoomIn()}
                   className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
@@ -257,7 +276,6 @@ const MapDashboard = () => {
                 }}
               >
                 <VietNamMapSVG 
-                  width={900} 
                   isShowProvinceList={false} 
                   onClickProvince={handleProvinceClick} 
                   onDistrictClick={onDistrictClick}

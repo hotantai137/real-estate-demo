@@ -38,7 +38,7 @@ const provincePrices: Record<string, { avgPrice: number; change: number }> = {
   // Add more provinces as needed
 };
 
-const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true, width = 576, height = 600, onClickProvince, onDistrictClick, provinceName }) => {
+const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true, onClickProvince, onDistrictClick, provinceName }) => {
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [districts, setDistricts] = useState<DistrictData[]>([]);
   const [mainAnim, setMainAnim] = useState(false);
@@ -78,8 +78,7 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
   };  
 
   return (
-    <div className={`flex flex-row items-center justify-center relative`}
-    style={{width: `${width}px`, height: `${height}px`}}>
+    <div className={`flex flex-row items-center justify-center relative w-[700px] h-[500px] md:w-[900px] md:h-[600px]`}>
       <div className={`map-container flex justify-center items-center w-full h-full`}>
         {!selectedProvince && (
           <svg
