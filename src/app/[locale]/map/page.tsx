@@ -79,6 +79,8 @@ const MapDashboard = () => {
   const handleProvinceClick = (provinceName: string) => {
     console.log('Selected province:', provinceName);
     setSelectedProvince(provinceName);
+    setSelectedDistrict(null);
+    setDistrictCenter(null);
   };
 
   const toggleSidebar = () => {
@@ -106,8 +108,15 @@ const MapDashboard = () => {
   };
 
   const handleBack = () => {
-    setSelectedDistrict(null);
-    setDistrictCenter(null);
+    if (selectedDistrict) {
+      setSelectedProvince(selectedProvince);
+      setSelectedDistrict(null);
+      setDistrictCenter(null);
+    } else {
+      setSelectedProvince(null);
+      setSelectedDistrict(null);
+      setDistrictCenter(null);
+    }
   };
 
   return (
@@ -141,12 +150,12 @@ const MapDashboard = () => {
         {isSidebarVisible ? 'Collapse filter' : 'Expand filter'}
       </button>
 
-      {selectedDistrict && (
+      {(selectedProvince || selectedDistrict) && (
           <button
           className={`absolute ${isSidebarVisible ? 'left-[25%]' : 'left-0'} top-32 z-[999] bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer shadow-lg hover:bg-blue-600 transition-all duration-500 ease-in-out`}
           onClick={handleBack}
         >
-          Back To Map
+          {selectedDistrict ? 'Quay lại tỉnh thành' : 'Quay lại bản đồ'}
         </button>
         )}
 
@@ -247,7 +256,13 @@ const MapDashboard = () => {
                   height: '100%'
                 }}
               >
-                <VietNamMapSVG width={900} isShowProvinceList={false} onDistrictClick={onDistrictClick} />
+                <VietNamMapSVG 
+                  width={900} 
+                  isShowProvinceList={false} 
+                  onClickProvince={handleProvinceClick} 
+                  onDistrictClick={onDistrictClick}
+                  provinceName={selectedProvince}
+                />
               </TransformComponent>
             </>
           )}

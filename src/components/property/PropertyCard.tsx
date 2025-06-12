@@ -31,7 +31,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-sm">
+        <div className="absolute top-2 right-2 bg-[#44b5bb] text-white px-2 py-1 rounded text-sm">
           {tTypes(property.type)}
         </div>
       </div>
@@ -83,10 +83,10 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-xl font-bold text-blue-600">{formatPrice(property.price)}</span>
+          <span className="text-xl font-bold text-[#44b5bb]">{formatPrice(property.price)}</span>
           <Link
             href={`/${locale}/property/${property.id}`}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#44b5bb] hover:bg-blue-700"
           >
             {t('view_details')}
           </Link>

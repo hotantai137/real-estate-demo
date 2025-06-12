@@ -5,45 +5,26 @@ import './styles/custom-maker.css';
 
 
 type HouseMarkerProps = {
-  id: string;
-  position: [number, number];
-  name: string;
-  type: 'residential' | 'house' | 'building';
-  price: number;
+  markerData: any;
+  isBouncing: boolean;
   onViewDetail: (id: string) => void;
 };
 
-const HouseMarker = ({ id, position, name, type, price, onViewDetail }: HouseMarkerProps) => {
-  const [isBouncing, setIsBouncing] = useState(false);
+const HouseMarker = ({ markerData, isBouncing, onViewDetail }: HouseMarkerProps) => {
   const [showDetail, setShowDetail] = useState(false);
   const markerRef = useRef<L.Marker | null>(null);
-  const image = type === 'residential' ? './residential.png' : type === 'house' ? './house.png' : './building.png';
+  const image = markerData.type === 'building' ? './building.png' : './residential.png';
 
-  const icon = L.divIcon({
-    className: 'custom-house-icon',
-    html: `
-      <div class="marker-wrapper ${isBouncing ? 'bounce' : ''}">
-        <button class="detail-button ${showDetail ? 'visible' : ''}" id="detail-btn-${id}">Xem chi tiết</button>
-        <div class="house-icon">
-          <img style="width: 30px; height: 30px;" src="${image}" alt="House Icon" />
-        </div>
-        <div class="label">${name}</div>
-      </div>
-    `,
-    iconSize: [60, 60],
-    iconAnchor: [30, 60],
-  });
-
-  const customIcon = L.divIcon({
+  const marker = L.divIcon({
     className: 'custom-div-icon',
     html: `
-      <div class="marker-container ${isBouncing ? 'bounce' : ''}" style="
+      <div class="marker-container ${isBouncing ? 'bounce' : ''}"" style="
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
       ">
-        <img src="${image}" 
+        <img src="${markerData.type === 'building' ? '/building.png' : '/residential.png'}" 
              style="width: 45px; height: 50px;" />
         <div class="marker-label" style="
           background: white;
@@ -56,8 +37,8 @@ const HouseMarker = ({ id, position, name, type, price, onViewDetail }: HouseMar
           text-align: center;
           width: fit-content;
         ">
-          <div style="font-weight: bold; color: #1a56db;">${name}</div>
-          <div style="color: #dc2626;">$${price}</div>
+          <div style="font-weight: bold; color: #1a56db;">${markerData.name}</div>
+          <div style="color: #dc2626;">$${markerData.price.toLocaleString()}</div>
         </div>
       </div>
     `,
@@ -69,16 +50,16 @@ const HouseMarker = ({ id, position, name, type, price, onViewDetail }: HouseMar
   // Gắn click cho nút chi tiết
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const btn = document.getElementById(`detail-btn-${id}`);
+      const btn = document.getElementById(`detail-btn-${markerData.id}`);
       if (btn) {
         btn.onclick = (e) => {
           e.stopPropagation();
-          onViewDetail(id);
+          onViewDetail(markerData.id);
         };
       }
     }, 100);
     return () => clearTimeout(timeout);
-  }, [showDetail]);
+  }, [markerData.id]);
 
   // useEffect(() => {
   //   if (isBouncing) {
@@ -90,45 +71,74 @@ const HouseMarker = ({ id, position, name, type, price, onViewDetail }: HouseMar
   return (
     <Marker
       ref={(ref) => { markerRef.current = ref }}
-      position={position}
-      icon={customIcon}
+      position={markerData.position}
+      icon={marker}
       eventHandlers={{
         click: () => {
-          setIsBouncing(true);
-          setShowDetail(true);
+          onViewDetail(markerData.id);
         },
       }}
     />
   );
 };
 
-export function getHouseMarkerHTML({ id, name, type, price }: { id: string, name: string, type: 'residential' | 'house' | 'building', price: number }) {
-  const image = type === 'residential' ? './residential.png' : type === 'house' ? './house.png' : './building.png';
-  return `
-    <div class="marker-container" style="
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    ">
-      <img src="${image}" 
-           style="width: 45px; height: 50px;" />
-      <div class="marker-label" style="
-        background: white;
-        padding: 2px 6px;
-        border-radius: 4px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        font-size: 12px;
-        white-space: nowrap;
-        margin-top: 4px;
-        text-align: center;
-        width: fit-content;
+export function getHouseMarkerHTML({ markerData, isBouncing, onViewDetail }: HouseMarkerProps) {
+  const marker = L.divIcon({
+    className: 'custom-div-icon',
+    html: `
+      <div class="marker-container ${isBouncing ? 'bounce' : ''}"" style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       ">
-        <div style="font-weight: bold; color: #1a56db;">${name}</div>
-        <div style="color: #dc2626;">$${price}</div>
+        <img src="${markerData.type === 'building' ? '/building.png' : '/residential.png'}" 
+             style="width: 45px; height: 50px;" />
+        <div class="marker-label" style="
+          background: white;
+          padding: 2px 6px;
+          border-radius: 4px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+          font-size: 12px;
+          white-space: nowrap;
+          margin-top: 4px;
+          text-align: center;
+          width: fit-content;
+        ">
+          <div style="font-weight: bold; color: #1a56db;">${markerData.name}</div>
+          <div style="color: #dc2626;">$${markerData.price.toLocaleString()}</div>
+        </div>
       </div>
-    </div>
-  `;
+    `,
+    iconSize: [45, 80],
+    iconAnchor: [22, 50],
+    popupAnchor: [0, -50],
+  });
+  return marker;
+}
+
+export function getHouseMarkerPopupHTML({ markerData, isBouncing, onViewDetail }: HouseMarkerProps) {
+  return `
+        <div style="text-align: center; width: 100px; padding: 6px;">
+          <button onclick="window.open('/property/${markerData.id}', '_blank')" 
+                  style="
+                    background-color: #11506d;
+                    color: white;
+                    padding: 8px 8px;
+                    border-radius: 10px;
+                    border: none;
+                    cursor: pointer;
+                    font-weight: 500;
+                    box-shadow: inset 2px 2px 4px 0 hsla(0, 0%, 75%, .5), inset -2px -2px 4px 0 rgba(59, 59, 59, .25), 0 2px 4px 0 rgba(86, 86, 86, .15);
+                    transition: background-color 0.2s;
+                  "
+                  onmouseover="this.style.backgroundColor='#1e40af'"
+                  onmouseout="this.style.backgroundColor='#1a56db'"
+          >
+            View Details
+          </button>
+        </div>
+      `;
 }
 
 export default HouseMarker;

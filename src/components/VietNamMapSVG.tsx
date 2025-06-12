@@ -25,7 +25,9 @@ interface VietNamMapSVGProps {
   isShowProvinceList?: boolean;
   width?: number;
   height?: number;
+  onClickProvince?: (province: string) => void;
   onDistrictClick?: (district: any) => void;
+  provinceName?: string | null;
 }
 
 // Mock data for province prices
@@ -36,12 +38,21 @@ const provincePrices: Record<string, { avgPrice: number; change: number }> = {
   // Add more provinces as needed
 };
 
-const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true, width = 576, height = 600, onDistrictClick }) => {
+const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true, width = 576, height = 600, onClickProvince, onDistrictClick, provinceName }) => {
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [districts, setDistricts] = useState<DistrictData[]>([]);
   const [mainAnim, setMainAnim] = useState(false);
   const [provinceAnim, setProvinceAnim] = useState<"in" | "out" | null>(null);
   const [hoveredProvince, setHoveredProvince] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedProvince(provinceName || null);
+    if (provinceName) {
+      // handleProvinceClick(provinceName);
+      handleProvinceClick('Hồ Chí Minh');
+    }    
+  }, [provinceName]);
+
 
   const handleProvinceClick = async (province: string) => {
     setMainAnim(true);
@@ -52,7 +63,7 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
         (d: DistrictData) => d.province === province
       );
       setDistricts(filtered);
-      setSelectedProvince(province);
+      // setSelectedProvince(province);
       setMainAnim(false);
       setProvinceAnim("in");
     }, 600);
@@ -86,7 +97,7 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
                       fill={hoveredProvince === province.name ? "#4ade80" : "#d9d9d9"}
                       stroke="#555"
                       strokeWidth={0.5}
-                      onClick={() => handleProvinceClick(province.name)}
+                      onClick={() => onClickProvince && onClickProvince(province.name)}
                       onMouseEnter={() => setHoveredProvince(province.name)}
                       onMouseLeave={() => setHoveredProvince(null)}
                       className="transition-colors cursor-pointer"

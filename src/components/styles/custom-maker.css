@@ -19,15 +19,15 @@
     box-shadow: 0 0 4px rgba(0,0,0,0.2);
   }
   
-  .bounce {
+  .custom-div-icon.bounce .marker-container {
     animation: bounce 0.8s infinite;
   }
   
-  @keyframes bounce {
+  /* @keyframes bounce {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-10px); }
     100% { transform: translateY(0); }
-  }
+  } */
   
   .popup-content {
     text-align: center;
@@ -43,3 +43,98 @@
     cursor: pointer;
   }
   
+  /* Custom popup styles */
+  .leaflet-popup-content-wrapper {
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    animation: popupDrop 0.3s ease-out;
+    /* transform-origin: top center;  */
+  }
+
+  .leaflet-popup-tip-container{
+    animation: popupDrop 0.3s ease-out;
+  }
+  
+  @keyframes popupDrop {
+    0% {
+      opacity: 0;
+      transform: translateY(-200%);
+    }
+    60% {
+        opacity: .8;
+        transform: translateY(0);
+    }
+    
+    80% {
+        transform: translateY(-15%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+  .leaflet-popup-content {
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .leaflet-popup-tip-container {
+    margin-top: -1px;
+  }
+  
+  .leaflet-popup-tip {
+    background: white;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+  }
+
+  .marker-hover-tooltip {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .marker-hover-circle {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+  }
+  
+  .marker-hover-info {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    padding: 8px 16px 6px 16px;
+    min-width: 120px;
+    text-align: center;
+  }
+  
+  .info-title {
+    color: #19506b;
+    font-size: 15px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+  
+  .info-detail {
+    color: #19506b;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .info-icon {
+    font-size: 15px;
+    vertical-align: middle;
+  }
+  
+  .ward-marker-hover .ward-marker-wrapper > div:first-child {
+    background: #ffd600 !important;   /* vàng đậm hơn */
+    border-color: #fff !important;    /* viền trắng */
+  }

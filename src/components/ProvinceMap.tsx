@@ -2,12 +2,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import svgPathBounds from "svg-path-bounds";
 import { svgPathProperties } from 'svg-path-properties'
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
-const MapView = dynamic(() => import('./MapView'), {
-  ssr: false,
-  loading: () => <div>Loading map...</div>
-});
+// const MapView = dynamic(() => import('./MapView'), {
+//   ssr: false,
+//   loading: () => <div>Loading map...</div>
+// });
 
 type Direction = 'left' | 'right' | 'top' | 'bottom';
 type District = {

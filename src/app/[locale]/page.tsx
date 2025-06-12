@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* Viet Nam Map */}
       {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Viet Nam Map</h2>
+        <h2 className="text-3xl font-bold text-[#11506d] mb-8">Viet Nam Map</h2>
         <MapWrapper />
       </div> */}
 
@@ -48,7 +48,12 @@ export default function Home() {
 
       {/* Latest Properties Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('latest')}</h2>
+      <h2 className="text-3xl font-bold text-[#11506d] mb-8 flex items-center">
+        <span className="flex items-center mr-2" style={{height: '1em'}}>
+          <span className="block text-[#44b5bb]" style={{fontSize: '1.2em', lineHeight: '1'}}>│</span>
+        </span>
+        {t('latest')}
+      </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestProperties.map((property) => (
             <PropertyCard key={property.id} property={property} />
@@ -59,7 +64,12 @@ export default function Home() {
       {/* Most Viewed Properties Section */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('popular')}</h2>
+        <h2 className="text-3xl font-bold text-[#11506d] mb-8 flex items-center">
+        <span className="flex items-center mr-2" style={{height: '1em'}}>
+          <span className="block text-[#44b5bb]" style={{fontSize: '1.2em', lineHeight: '1'}}>│</span>
+        </span>
+        {t('popular')}
+      </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mostViewedProperties.map((property) => (
               <PropertyCard key={property.id} property={property} />
@@ -70,14 +80,19 @@ export default function Home() {
 
       {/* Statistics Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">{statsT('title')}</h2>
+      <h2 className="text-3xl font-bold text-[#11506d] mb-8 flex items-center">
+        <span className="flex items-center mr-2" style={{height: '1em'}}>
+          <span className="block text-[#44b5bb]" style={{fontSize: '1.2em', lineHeight: '1'}}>│</span>
+        </span>
+        {statsT('title')}
+      </h2>
         <Statistics />
       </section>
 
       {/* News Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">{newsT('title')}</h2>
+          <h2 className="text-3xl font-bold text-[#11506d]">{newsT('title')}</h2>
           <Link href="/news" className="text-blue-600 hover:text-blue-700 font-medium">
             {newsT('view_all')} →
           </Link>
@@ -106,7 +121,7 @@ export default function Home() {
                 <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Wide Range of Properties</h3>
+            <h3 className="text-xl font-semibold text-[#11506d] mb-2">Wide Range of Properties</h3>
             <p className="text-gray-600">Find your perfect home from our extensive collection of properties</p>
           </div>
           <div className="text-center">
@@ -123,7 +138,7 @@ export default function Home() {
                 <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Best Price Guarantee</h3>
+            <h3 className="text-xl font-semibold text-[#11506d] mb-2">Best Price Guarantee</h3>
             <p className="text-gray-600">Get the best deals and competitive prices for your dream property</p>
           </div>
           <div className="text-center">
@@ -140,7 +155,7 @@ export default function Home() {
                 <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Trusted Service</h3>
+            <h3 className="text-xl font-semibold text-[#11506d] mb-2">Trusted Service</h3>
             <p className="text-gray-600">Professional and reliable service from our experienced team</p>
           </div>
         </div>
