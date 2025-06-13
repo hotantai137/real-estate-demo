@@ -245,11 +245,8 @@ const worldWithHole = {
         {locations.map((loc) => (
           <HouseMarker
             key={loc.id}
-            id={loc.id}
-            name={loc.name}
-            type={loc.type}
-            price={loc.price}
-            position={loc.position}
+            markerData={loc}
+            isBouncing={isBouncing}
             onViewDetail={(id) => setSelectedId(id)}
           />
         ))}

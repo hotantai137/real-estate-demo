@@ -120,7 +120,7 @@ export function getHouseMarkerHTML({ markerData, isBouncing, onViewDetail }: Hou
 export function getHouseMarkerPopupHTML({ markerData, isBouncing, onViewDetail }: HouseMarkerProps) {
   return `
         <div style="text-align: center; width: 100px; padding: 6px;">
-          <button onclick="window.open('/property/${markerData.id}', '_blank')" 
+          <button onclick="window.open('/property/1', '_blank')" 
                   style="
                     background-color: #11506d;
                     color: white;

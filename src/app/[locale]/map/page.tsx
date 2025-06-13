@@ -49,6 +49,7 @@ const MapDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<'price' | 'house'>('price');
 
   useEffect(() => {
     fetch("/data/vietnam.json")
@@ -142,7 +143,7 @@ const MapDashboard = () => {
     <div className="flex h-screen bg-gray-50 mt-20 relative">
       
       <select
-          className="w-[185px] absolute left-0 top-0 z-[600] p-4 shadow rounded-lg hidden md:block"//Hidden when screen is < 768px
+          className="w-[185px] absolute left-0 top-0 z-[600] p-4 shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] rounded-lg hidden md:block bg-white text-[#11506d] font-bold appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgNmw1IDUgNS01IiBzdHJva2U9IiMxMTUwNmQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-no-repeat bg-[center_right_12px]"
           value={selectedProvince || ''}
           onChange={(e) => handleProvinceChange(e)}
         >
@@ -152,7 +153,7 @@ const MapDashboard = () => {
           ))}
         </select>
         <select
-          className="w-[185px] absolute left-[195px] top-0 z-[600] p-4 shadow rounded-lg hidden md:block"//Hidden when screen is < 768px
+          className="w-[185px] absolute left-[195px] top-0 z-[600] p-4 shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] rounded-lg hidden md:block bg-white text-[#11506d] font-bold appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgNmw1IDUgNS01IiBzdHJva2U9IiMxMTUwNmQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-no-repeat bg-[center_right_12px]"
           value={selectedDistrict || ''}
           onChange={e => setSelectedDistrict(e.target.value)}
         >
@@ -182,6 +183,39 @@ const MapDashboard = () => {
       <div className={`hidden md:flex z-[500] w-1/4 p-6 rounded-lg bg-gray-100 border-gray-200 overflow-hidden flex-col transition-all duration-500 ease-in-out absolute left-0 top-16 bottom-0 ${isSidebarVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} ${isSidebarHidden ? 'hidden' : ''}`}>
         {/* Filters Section */}
         <div className="space-y-4 mb-6">
+          {/* Button Group */}
+          <div className="flex mb-4 gap-0 w-full">
+            <button
+              className={`w-1/2 flex items-center justify-center px-6 py-3 rounded-l-xl font-bold focus:outline-none transition-colors duration-200
+                ${selectedTab === 'price'
+                  ? 'bg-[#296080] text-white shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280]'
+                  : 'bg-white text-[#296080] shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] border-r border-gray-200'}
+              `}
+              onClick={() => setSelectedTab('price')}
+            >
+              <img
+                src={selectedTab === 'price' ? '/price.svg' : '/price-dark.svg'}
+                alt="price icon"
+                className="h-6 w-6 mr-2"
+              />
+              <span>Xem giá</span>
+            </button>
+            <button
+              className={`w-1/2 flex items-center justify-center px-6 py-3 rounded-r-xl font-bold focus:outline-none transition-colors duration-200
+                ${selectedTab === 'house'
+                  ? 'bg-[#296080] text-white shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280]'
+                  : 'bg-white text-[#296080] shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] border-l border-gray-200'}
+              `}
+              onClick={() => setSelectedTab('house')}
+            >
+              <img
+                src={selectedTab === 'house' ? '/house.svg' : '/house-dark.svg'}
+                alt="house icon"
+                className="h-6 w-6 mr-2"
+              />
+              <span>Bán nhà</span>
+            </button>
+          </div>
           {/* Search Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">

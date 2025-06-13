@@ -77,6 +77,16 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
     }, 600);
   };  
 
+  // Random color for provinces
+const provinceColors = useMemo(() => {
+  const colors = ["#7FD5DB", "#A3C2D7", "#AED0E6"];
+  // Each province gets a random color
+  return provinces.reduce((acc, province) => {
+    acc[province.id] = colors[Math.floor(Math.random() * colors.length)];
+    return acc;
+  }, {} as Record<string, string>);
+}, [provinces]);
+
   return (
     <div className={`flex flex-row items-center justify-center relative w-[700px] h-[500px] md:w-[900px] md:h-[600px]`}>
       <div className={`map-container flex justify-center items-center w-full h-full`}>
@@ -93,7 +103,7 @@ const VietNamMapSVG: React.FC<VietNamMapSVGProps> = ({ isShowProvinceList = true
                   <g key={province.id}>
                     <path
                       d={province.path}
-                      fill={hoveredProvince === province.name ? "#4ade80" : "#d9d9d9"}
+                      fill={hoveredProvince === province.name ? "#4ade80" : provinceColors[province.id]}
                       stroke="#555"
                       strokeWidth={0.5}
                       onClick={() => onClickProvince && onClickProvince(province.name)}

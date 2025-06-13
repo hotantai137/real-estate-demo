@@ -48,6 +48,13 @@ function MarkerCluster({ center }: { center: [number, number] }) {
   const map = useMap();
 
   useEffect(() => {
+    //clear all markers
+    map.eachLayer(layer => {
+      if (layer instanceof L.Marker) {
+        map.removeLayer(layer);
+      }
+    });
+
     // Generate random markers data
     const newMarkers: MarkerData[] = Array.from({ length: 1000 }).map((_, index) => {
       const price = (Math.random() * 1000000).toFixed(2);

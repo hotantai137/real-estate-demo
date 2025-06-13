@@ -40,7 +40,7 @@ function getWardMarkerHTML(ward: any) {
         font-weight:bold;
         color:#234a63;
         box-shadow:0 1px 4px rgba(0,0,0,0.10);">
-        $${ward.avg_price ? ward.avg_price : '--'}
+        $${Math.floor(Math.random() * 900) + 100}
       </div>
     </div>
   `;
@@ -52,6 +52,13 @@ const MarkerClusterGroup: React.FC<MarkerClusterGroupProps> = ({ markers, onMark
   const polygonRef = useRef<L.Polygon | null>(null);
 
   useEffect(() => {
+    //clear all markers
+    map.eachLayer(layer => {
+      if (layer instanceof L.Marker) {
+        map.removeLayer(layer);
+      }
+    });
+
     const markerClusterGroup = L.markerClusterGroup({
       chunkedLoading: true,
       maxClusterRadius: 50,

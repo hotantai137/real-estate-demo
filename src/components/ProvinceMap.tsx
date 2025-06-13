@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import svgPathBounds from "svg-path-bounds";
 import { svgPathProperties } from 'svg-path-properties'
@@ -184,6 +183,15 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
     const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
     const [districtCenter, setDistrictCenter] = useState<{ lat: number; lon: number } | null>(null);
     
+    // Random color for districts
+    const districtColors = useMemo(() => {
+      const colors = ["#7FD5DB", "#A3C2D7", "#AED0E6"];
+      return districts.reduce((acc, district) => {
+        acc[district.id] = colors[Math.floor(Math.random() * colors.length)];
+        return acc;
+      }, {} as Record<string, string>);
+    }, [districts]);
+
     useEffect(() => {
       fetch("/data/vietnam.json")
         .then(res => res.json())
@@ -456,7 +464,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
                 d={district.path.replace(/L/g, "L ").replace(/M/g, "M ")}
                 stroke="white"
                 strokeWidth={0.005}
-                fill="#a0d2eb"
+                fill={districtColors[district.id]}
                 ref={el => { pathRefs.current[district.name] = el; }}
                 className="hover:fill-green-400 transition-colors cursor-pointer"
                 onClick={() => onDistrictClick?.(district)}
