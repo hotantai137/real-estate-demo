@@ -50,6 +50,8 @@ const MapDashboard = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
   const [selectedTab, setSelectedTab] = useState<'price' | 'house'>('price');
+  const [provinceDropdown, setProvinceDropdown] = useState<string | null>(null);
+  const [districtDropdown, setDistrictDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/data/vietnam.json")
@@ -127,6 +129,7 @@ const MapDashboard = () => {
   };
 
   const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setProvinceDropdown(e.target.value);
     const provinceId = e.target.value;
     console.log(provinceId);
     // setSelectedProvince(provinceName);
@@ -144,7 +147,7 @@ const MapDashboard = () => {
       
       <select
           className="w-[185px] absolute left-0 top-0 z-[600] p-4 shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] rounded-lg hidden md:block bg-white text-[#11506d] font-bold appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgNmw1IDUgNS01IiBzdHJva2U9IiMxMTUwNmQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-no-repeat bg-[center_right_12px]"
-          value={selectedProvince || ''}
+          value={provinceDropdown || ''}
           onChange={(e) => handleProvinceChange(e)}
         >
           <option value="">Tỉnh thành</option>
@@ -154,8 +157,8 @@ const MapDashboard = () => {
         </select>
         <select
           className="w-[185px] absolute left-[195px] top-0 z-[600] p-4 shadow-[0_2px_4px_#56565626,inset_-2px_-2px_4px_#94949440,inset_2px_2px_4px_#f2f2f280] rounded-lg hidden md:block bg-white text-[#11506d] font-bold appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgNmw1IDUgNS01IiBzdHJva2U9IiMxMTUwNmQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-no-repeat bg-[center_right_12px]"
-          value={selectedDistrict || ''}
-          onChange={e => setSelectedDistrict(e.target.value)}
+          value={districtDropdown || ''}
+          onChange={e => setDistrictDropdown(e.target.value)}
         >
           <option value="">Quận/huyện</option>
           {districts?.map((district: any) => (

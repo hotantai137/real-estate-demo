@@ -171,6 +171,16 @@ function calculateViewBoxFromPaths(districts: { path: string }[]): string {
     return { x: midpoint.x, y: midpoint.y }
   }
 
+// Thay thế random màu bằng hàm hash cố định
+function pickColorById(id: string) {
+  const colors = ["#7FD5DB", "#A3C2D7", "#AED0E6"];
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash += id.charCodeAt(i);
+  }
+  return colors[hash % colors.length];
+}
+
 const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 576, height = 600, onDistrictClick }) => {
     const viewBox = calculateViewBoxFromPaths(districts);
     const [minX, minY, vbWidth, vbHeight] = viewBox.split(' ').map(Number);
@@ -464,7 +474,7 @@ const ProvinceMap: React.FC<ProvinceMapProps> = ({ province, districts, width = 
                 d={district.path.replace(/L/g, "L ").replace(/M/g, "M ")}
                 stroke="white"
                 strokeWidth={0.005}
-                fill={districtColors[district.id]}
+                fill={pickColorById(district.id)}
                 ref={el => { pathRefs.current[district.name] = el; }}
                 className="hover:fill-green-400 transition-colors cursor-pointer"
                 onClick={() => onDistrictClick?.(district)}
